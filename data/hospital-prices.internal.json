@@ -1,0 +1,2570 @@
+{
+  "generated": "2026-10-26",
+  "note": "INTERNAL ONLY. Includes negotiated_min/negotiated_max, which aggregate dozens of distinct payer/plan contracted rates per code. Do not expose this range to end users or in any letter \u2014 see data/README.md for why.",
+  "hospitals": [
+    {
+      "id": "cc-indian-river",
+      "name": "Cleveland Clinic Indian River Hospital",
+      "system": "Cleveland Clinic Florida",
+      "city": "Vero Beach",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://clevelandclinic.pt.panaceainc.com/MRFDownload/clevelandclinic/indianriver",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": 370.0,
+          "discounted_cash_price": 240.5,
+          "negotiated_min": 29.32,
+          "negotiated_max": 4027.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": 502.0,
+          "discounted_cash_price": 326.3,
+          "negotiated_min": 37.14,
+          "negotiated_max": 7917.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 20.0,
+          "discounted_cash_price": 13.0,
+          "negotiated_min": 2.52,
+          "negotiated_max": 232.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 374.0,
+          "discounted_cash_price": 243.1,
+          "negotiated_min": 37.39,
+          "negotiated_max": 1360.0
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 651.0,
+          "discounted_cash_price": 423.15,
+          "negotiated_min": 65.36,
+          "negotiated_max": 2529.0
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 79.0,
+          "discounted_cash_price": 51.35,
+          "negotiated_min": 6.91,
+          "negotiated_max": 608.0
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 97.0,
+          "discounted_cash_price": 63.05,
+          "negotiated_min": 8.2,
+          "negotiated_max": 857.0
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 97.0,
+          "discounted_cash_price": 63.05,
+          "negotiated_min": 8.45,
+          "negotiated_max": 734.4
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 592.0,
+          "discounted_cash_price": 384.8,
+          "negotiated_min": 66.59,
+          "negotiated_max": 1814.0
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 79.0,
+          "discounted_cash_price": 51.35,
+          "negotiated_min": 7.18,
+          "negotiated_max": 781.0
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 75.0,
+          "discounted_cash_price": 48.75,
+          "negotiated_min": 6.39,
+          "negotiated_max": 777.0
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 766.0,
+          "discounted_cash_price": 497.9,
+          "negotiated_min": 75.99,
+          "negotiated_max": 1668.0
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 801.0,
+          "discounted_cash_price": 520.65,
+          "negotiated_min": 79.34,
+          "negotiated_max": 3752.0
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 356.0,
+          "discounted_cash_price": 231.4,
+          "negotiated_min": 30.46,
+          "negotiated_max": 734.4
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 154.0,
+          "discounted_cash_price": 100.1,
+          "negotiated_min": 4.31,
+          "negotiated_max": 123.2
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 306.0,
+          "discounted_cash_price": 198.9,
+          "negotiated_min": 4.31,
+          "negotiated_max": 244.8
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 26.0,
+          "discounted_cash_price": 16.9,
+          "negotiated_min": 4.31,
+          "negotiated_max": 142.4
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 56.0,
+          "discounted_cash_price": 36.4,
+          "negotiated_min": 1.43,
+          "negotiated_max": 44.8
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 41.0,
+          "discounted_cash_price": 26.65,
+          "negotiated_min": 2.59,
+          "negotiated_max": 64.0
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 107.0,
+          "discounted_cash_price": 69.55,
+          "negotiated_min": 2.59,
+          "negotiated_max": 85.6
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 129.0,
+          "discounted_cash_price": 83.85,
+          "negotiated_min": 6.33,
+          "negotiated_max": 124.8
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": 154.0,
+          "discounted_cash_price": 100.1,
+          "negotiated_min": 2.81,
+          "negotiated_max": 123.2
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 68.0,
+          "discounted_cash_price": 44.2,
+          "negotiated_min": 12.3,
+          "negotiated_max": 214.4
+        },
+        {
+          "code": "93000",
+          "description": "EKG (ECG) complete with interpretation",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 16.03,
+          "negotiated_max": 20.24
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 428.0,
+          "discounted_cash_price": 278.2,
+          "negotiated_min": 10.59,
+          "negotiated_max": 342.4
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 75.0,
+          "discounted_cash_price": 48.75,
+          "negotiated_min": 23.75,
+          "negotiated_max": 1454.4
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 40.0,
+          "discounted_cash_price": 26.0,
+          "negotiated_min": 9.19,
+          "negotiated_max": 1089.0
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 79.0,
+          "discounted_cash_price": 51.35,
+          "negotiated_min": 26.81,
+          "negotiated_max": 1454.4
+        },
+        {
+          "code": "99221",
+          "description": "Initial hospital care, level 1",
+          "gross_charge": 652.0,
+          "discounted_cash_price": 423.8,
+          "negotiated_min": 47.83,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "99222",
+          "description": "Initial hospital care, level 2",
+          "gross_charge": 1040.0,
+          "discounted_cash_price": 676.0,
+          "negotiated_min": 64.28,
+          "negotiated_max": 1040.0
+        },
+        {
+          "code": "99223",
+          "description": "Initial hospital care, level 3",
+          "gross_charge": 1400.0,
+          "discounted_cash_price": 910.0,
+          "negotiated_min": 94.19,
+          "negotiated_max": 1400.0
+        },
+        {
+          "code": "99232",
+          "description": "Subsequent hospital care, level 2",
+          "gross_charge": 636.0,
+          "discounted_cash_price": 413.4,
+          "negotiated_min": 33.87,
+          "negotiated_max": 636.0
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 110.0,
+          "discounted_cash_price": 71.5,
+          "negotiated_min": 11.7,
+          "negotiated_max": 1970.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 409.0,
+          "discounted_cash_price": 265.85,
+          "negotiated_min": 20.39,
+          "negotiated_max": 2168.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 704.0,
+          "discounted_cash_price": 457.6,
+          "negotiated_min": 35.8,
+          "negotiated_max": 2168.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 1206.0,
+          "discounted_cash_price": 783.9,
+          "negotiated_min": 59.76,
+          "negotiated_max": 2938.4
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 1760.0,
+          "discounted_cash_price": 1144.0,
+          "negotiated_min": 89.52,
+          "negotiated_max": 4230.4
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 1980.0,
+          "discounted_cash_price": 1287.0,
+          "negotiated_min": 104.05,
+          "negotiated_max": 5814.4
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 165.0,
+          "discounted_cash_price": 107.25,
+          "negotiated_min": 38.78,
+          "negotiated_max": 5963.0
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 1.41,
+          "discounted_cash_price": 0.92,
+          "negotiated_min": 0.18,
+          "negotiated_max": 27.0
+        }
+      ]
+    },
+    {
+      "id": "cc-tradition",
+      "name": "Cleveland Clinic Martin Health Tradition Hospital",
+      "system": "Cleveland Clinic Florida (Martin Health)",
+      "city": "Port St. Lucie",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://clevelandclinic.pt.panaceainc.com/MRFDownload/clevelandclinic/martin-north-south-tradition",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": 370.0,
+          "discounted_cash_price": 240.5,
+          "negotiated_min": 38.94,
+          "negotiated_max": 8696.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": 502.0,
+          "discounted_cash_price": 326.3,
+          "negotiated_min": 50.76,
+          "negotiated_max": 8696.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 25.0,
+          "discounted_cash_price": 16.25,
+          "negotiated_min": 2.34,
+          "negotiated_max": 514.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 374.0,
+          "discounted_cash_price": 243.1,
+          "negotiated_min": 31.26,
+          "negotiated_max": 2135.0
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 651.0,
+          "discounted_cash_price": 423.15,
+          "negotiated_min": 54.65,
+          "negotiated_max": 2529.0
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 79.0,
+          "discounted_cash_price": 51.35,
+          "negotiated_min": 8.69,
+          "negotiated_max": 839.0
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 97.0,
+          "discounted_cash_price": 63.05,
+          "negotiated_min": 10.38,
+          "negotiated_max": 857.0
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 97.0,
+          "discounted_cash_price": 63.05,
+          "negotiated_min": 9.03,
+          "negotiated_max": 1015.0
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 592.0,
+          "discounted_cash_price": 384.8,
+          "negotiated_min": 55.67,
+          "negotiated_max": 2278.0
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 79.0,
+          "discounted_cash_price": 51.35,
+          "negotiated_min": 7.76,
+          "negotiated_max": 839.0
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 75.0,
+          "discounted_cash_price": 48.75,
+          "negotiated_min": 6.23,
+          "negotiated_max": 835.0
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 766.0,
+          "discounted_cash_price": 497.9,
+          "negotiated_min": 63.53,
+          "negotiated_max": 2135.0
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 801.0,
+          "discounted_cash_price": 520.65,
+          "negotiated_min": 66.33,
+          "negotiated_max": 3881.0
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 356.0,
+          "discounted_cash_price": 231.4,
+          "negotiated_min": 30.0,
+          "negotiated_max": 1274.0
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 428.0,
+          "discounted_cash_price": 278.2,
+          "negotiated_min": 4.54,
+          "negotiated_max": 385.2
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 514.0,
+          "discounted_cash_price": 334.1,
+          "negotiated_min": 4.54,
+          "negotiated_max": 462.6
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 26.0,
+          "discounted_cash_price": 16.9,
+          "negotiated_min": 4.54,
+          "negotiated_max": 160.2
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 32.0,
+          "discounted_cash_price": 20.8,
+          "negotiated_min": 1.5,
+          "negotiated_max": 79.2
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 20.0,
+          "discounted_cash_price": 13.0,
+          "negotiated_min": 2.36,
+          "negotiated_max": 85.5
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 37.0,
+          "discounted_cash_price": 24.05,
+          "negotiated_min": 2.73,
+          "negotiated_max": 96.3
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 59.0,
+          "discounted_cash_price": 38.35,
+          "negotiated_min": 6.66,
+          "negotiated_max": 140.4
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": 62.0,
+          "discounted_cash_price": 40.3,
+          "negotiated_min": 2.96,
+          "negotiated_max": 158.4
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 68.0,
+          "discounted_cash_price": 44.2,
+          "negotiated_min": 18.3,
+          "negotiated_max": 275.04
+        },
+        {
+          "code": "93000",
+          "description": "EKG (ECG) complete with interpretation",
+          "gross_charge": 75.0,
+          "discounted_cash_price": 48.75,
+          "negotiated_min": 10.98,
+          "negotiated_max": 1168.0
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 295.0,
+          "discounted_cash_price": 191.75,
+          "negotiated_min": 4.85,
+          "negotiated_max": 1168.0
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 75.0,
+          "discounted_cash_price": 48.75,
+          "negotiated_min": 23.75,
+          "negotiated_max": 1721.0
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 40.0,
+          "discounted_cash_price": 26.0,
+          "negotiated_min": 9.19,
+          "negotiated_max": 1721.0
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 79.0,
+          "discounted_cash_price": 51.35,
+          "negotiated_min": 26.81,
+          "negotiated_max": 1721.0
+        },
+        {
+          "code": "99221",
+          "description": "Initial hospital care, level 1",
+          "gross_charge": 652.0,
+          "discounted_cash_price": 423.8,
+          "negotiated_min": 62.81,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "99222",
+          "description": "Initial hospital care, level 2",
+          "gross_charge": 1040.0,
+          "discounted_cash_price": 676.0,
+          "negotiated_min": 99.07,
+          "negotiated_max": 1040.0
+        },
+        {
+          "code": "99223",
+          "description": "Initial hospital care, level 3",
+          "gross_charge": 1400.0,
+          "discounted_cash_price": 910.0,
+          "negotiated_min": 132.0,
+          "negotiated_max": 1400.0
+        },
+        {
+          "code": "99232",
+          "description": "Subsequent hospital care, level 2",
+          "gross_charge": 636.0,
+          "discounted_cash_price": 413.4,
+          "negotiated_min": 53.14,
+          "negotiated_max": 636.0
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 110.0,
+          "discounted_cash_price": 71.5,
+          "negotiated_min": 11.91,
+          "negotiated_max": 2942.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 409.0,
+          "discounted_cash_price": 265.85,
+          "negotiated_min": 30.86,
+          "negotiated_max": 3512.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 704.0,
+          "discounted_cash_price": 457.6,
+          "negotiated_min": 46.22,
+          "negotiated_max": 3512.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 1206.0,
+          "discounted_cash_price": 783.9,
+          "negotiated_min": 88.36,
+          "negotiated_max": 4353.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 1760.0,
+          "discounted_cash_price": 1144.0,
+          "negotiated_min": 129.22,
+          "negotiated_max": 4759.2
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 1980.0,
+          "discounted_cash_price": 1287.0,
+          "negotiated_min": 166.46,
+          "negotiated_max": 6541.2
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 165.0,
+          "discounted_cash_price": 107.25,
+          "negotiated_min": 34.32,
+          "negotiated_max": 6980.0
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 1.41,
+          "discounted_cash_price": 0.92,
+          "negotiated_min": 0.11,
+          "negotiated_max": 27.0
+        }
+      ]
+    },
+    {
+      "id": "hca-lawnwood",
+      "name": "HCA Florida Lawnwood Hospital",
+      "system": "HCA Florida Healthcare",
+      "city": "Fort Pierce",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://stctrprodsnsvc00455826e6.blob.core.windows.net/pt-final-posting-files/59-1764486_HCA-FLORIDA-LAWNWOOD-HOSPITAL_standardcharges.json?si=dpx-pt-json-access-policy&spr=https&sv=2026-02-06&sr=c&sig=ks%2BgfAjyEHlZmeP2PYJ%2f9NpMuCoRStjTb2bhIy9Y6LM%3D",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 253.11,
+          "negotiated_max": 15153.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 343.15,
+          "negotiated_max": 15153.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 3.0,
+          "negotiated_max": 2702.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 9975.0,
+          "discounted_cash_price": 9975.0,
+          "negotiated_min": 185.25,
+          "negotiated_max": 8478.75
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 9945.0,
+          "discounted_cash_price": 9945.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 8453.25
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 1956.0,
+          "discounted_cash_price": 1956.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 1662.6
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 2523.0,
+          "discounted_cash_price": 2523.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 2144.55
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 2128.0,
+          "discounted_cash_price": 2128.0,
+          "negotiated_min": 183.01,
+          "negotiated_max": 1808.8
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 7057.0,
+          "discounted_cash_price": 7057.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 5998.45
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 2856.0,
+          "discounted_cash_price": 2856.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 2427.6
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 2399.0,
+          "discounted_cash_price": 2399.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 2319.65
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 21409.0,
+          "discounted_cash_price": 21409.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 18197.65
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 24040.0,
+          "discounted_cash_price": 24040.0,
+          "negotiated_min": 625.8,
+          "negotiated_max": 20434.0
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 3571.0,
+          "discounted_cash_price": 3571.0,
+          "negotiated_min": 185.25,
+          "negotiated_max": 3035.35
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 1665.0,
+          "discounted_cash_price": 1665.0,
+          "negotiated_min": 8.42,
+          "negotiated_max": 1415.25
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 1717.0,
+          "discounted_cash_price": 1717.0,
+          "negotiated_min": 10.51,
+          "negotiated_max": 1459.45
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 964.0,
+          "discounted_cash_price": 964.0,
+          "negotiated_min": 13.33,
+          "negotiated_max": 819.4
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 949.0,
+          "discounted_cash_price": 949.0,
+          "negotiated_min": 3.15,
+          "negotiated_max": 806.65
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 564.0,
+          "discounted_cash_price": 564.0,
+          "negotiated_min": 3.91,
+          "negotiated_max": 479.4
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 234.0,
+          "discounted_cash_price": 234.0,
+          "negotiated_min": 9.67,
+          "negotiated_max": 198.9
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 1126.0,
+          "discounted_cash_price": 1126.0,
+          "negotiated_min": 16.72,
+          "negotiated_max": 957.1
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 7.74,
+          "negotiated_max": 161.4
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 355.0,
+          "discounted_cash_price": 355.0,
+          "negotiated_min": 15.2,
+          "negotiated_max": 349.35
+        },
+        {
+          "code": "93000",
+          "description": "EKG (ECG) complete with interpretation",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 13.2,
+          "negotiated_max": 391.24
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 1503.0,
+          "discounted_cash_price": 1503.0,
+          "negotiated_min": 15.2,
+          "negotiated_max": 1277.55
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 1014.0,
+          "discounted_cash_price": 1014.0,
+          "negotiated_min": 37.05,
+          "negotiated_max": 861.9
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 502.0,
+          "discounted_cash_price": 502.0,
+          "negotiated_min": 14.25,
+          "negotiated_max": 426.7
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 1086.0,
+          "discounted_cash_price": 1086.0,
+          "negotiated_min": 42.75,
+          "negotiated_max": 982.6
+        },
+        {
+          "code": "99221",
+          "description": "Initial hospital care, level 1",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 114.95,
+          "negotiated_max": 117.37
+        },
+        {
+          "code": "99222",
+          "description": "Initial hospital care, level 2",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 153.9,
+          "negotiated_max": 157.14
+        },
+        {
+          "code": "99223",
+          "description": "Initial hospital care, level 3",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 224.2,
+          "negotiated_max": 228.92
+        },
+        {
+          "code": "99232",
+          "description": "Subsequent hospital care, level 2",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 79.8,
+          "negotiated_max": 81.48
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 2449.0,
+          "discounted_cash_price": 2449.0,
+          "negotiated_min": 25.65,
+          "negotiated_max": 7272.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 3329.0,
+          "discounted_cash_price": 3329.0,
+          "negotiated_min": 49.4,
+          "negotiated_max": 7898.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 4499.0,
+          "discounted_cash_price": 4499.0,
+          "negotiated_min": 73.15,
+          "negotiated_max": 8681.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 5504.0,
+          "discounted_cash_price": 5504.0,
+          "negotiated_min": 135.85,
+          "negotiated_max": 9710.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 5217.0,
+          "discounted_cash_price": 5217.0,
+          "negotiated_min": 197.6,
+          "negotiated_max": 9875.0
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 8592.0,
+          "discounted_cash_price": 8592.0,
+          "negotiated_min": 249.85,
+          "negotiated_max": 9875.0
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 159.0,
+          "discounted_cash_price": 159.0,
+          "negotiated_min": 30.21,
+          "negotiated_max": 203.15
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 0.95,
+          "discounted_cash_price": 0.95,
+          "negotiated_min": 0.07,
+          "negotiated_max": 157.25
+        }
+      ]
+    },
+    {
+      "id": "hca-stlucie",
+      "name": "HCA Florida St. Lucie Hospital",
+      "system": "HCA Florida Healthcare",
+      "city": "Port St. Lucie",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://stctrprodsnsvc00455826e6.blob.core.windows.net/pt-final-posting-files/62-1113740_HCA-FLORIDA-ST.-LUCIE-HOSPITAL_standardcharges.json?si=dpx-pt-json-access-policy&spr=https&sv=2026-02-06&sr=c&sig=ks%2BgfAjyEHlZmeP2PYJ%2f9NpMuCoRStjTb2bhIy9Y6LM%3D",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 253.11,
+          "negotiated_max": 15153.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 343.15,
+          "negotiated_max": 15153.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 117.0,
+          "discounted_cash_price": 117.0,
+          "negotiated_min": 3.0,
+          "negotiated_max": 2702.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 10102.0,
+          "discounted_cash_price": 10102.0,
+          "negotiated_min": 185.25,
+          "negotiated_max": 8586.7
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 7845.0,
+          "discounted_cash_price": 7845.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 6668.25
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 1442.0,
+          "discounted_cash_price": 1442.0,
+          "negotiated_min": 124.01,
+          "negotiated_max": 1225.7
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 1652.0,
+          "discounted_cash_price": 1652.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 1404.2
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 2062.0,
+          "discounted_cash_price": 2062.0,
+          "negotiated_min": 177.33,
+          "negotiated_max": 1752.7
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 7845.0,
+          "discounted_cash_price": 7845.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 6668.25
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 2205.0,
+          "discounted_cash_price": 2205.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 1874.25
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 2062.0,
+          "discounted_cash_price": 2062.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 1752.7
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 19453.0,
+          "discounted_cash_price": 19453.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 16535.05
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 27685.0,
+          "discounted_cash_price": 27685.0,
+          "negotiated_min": 625.8,
+          "negotiated_max": 23532.25
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 6285.0,
+          "discounted_cash_price": 6285.0,
+          "negotiated_min": 185.25,
+          "negotiated_max": 5342.25
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 3264.0,
+          "discounted_cash_price": 3264.0,
+          "negotiated_min": 8.42,
+          "negotiated_max": 2774.4
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 3457.0,
+          "discounted_cash_price": 3457.0,
+          "negotiated_min": 10.51,
+          "negotiated_max": 2938.45
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 32.61,
+          "discounted_cash_price": 32.61,
+          "negotiated_min": 2.8,
+          "negotiated_max": 1403.35
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 770.0,
+          "discounted_cash_price": 770.0,
+          "negotiated_min": 3.15,
+          "negotiated_max": 654.5
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 16.17,
+          "discounted_cash_price": 16.17,
+          "negotiated_min": 1.39,
+          "negotiated_max": 655.35
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 39.0,
+          "discounted_cash_price": 39.0,
+          "negotiated_min": 3.35,
+          "negotiated_max": 665.55
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 1702.0,
+          "discounted_cash_price": 1702.0,
+          "negotiated_min": 16.72,
+          "negotiated_max": 1446.7
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 7.74,
+          "negotiated_max": 161.4
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 210.0,
+          "discounted_cash_price": 210.0,
+          "negotiated_min": 15.2,
+          "negotiated_max": 219.3
+        },
+        {
+          "code": "93000",
+          "description": "EKG (ECG) complete with interpretation",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 13.2,
+          "negotiated_max": 391.24
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 1516.0,
+          "discounted_cash_price": 1516.0,
+          "negotiated_min": 15.2,
+          "negotiated_max": 1288.6
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 894.0,
+          "discounted_cash_price": 894.0,
+          "negotiated_min": 37.05,
+          "negotiated_max": 765.0
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 146.0,
+          "discounted_cash_price": 146.0,
+          "negotiated_min": 12.56,
+          "negotiated_max": 132.79
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 477.0,
+          "discounted_cash_price": 477.0,
+          "negotiated_min": 41.02,
+          "negotiated_max": 595.0
+        },
+        {
+          "code": "99221",
+          "description": "Initial hospital care, level 1",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 114.95,
+          "negotiated_max": 117.37
+        },
+        {
+          "code": "99222",
+          "description": "Initial hospital care, level 2",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 153.9,
+          "negotiated_max": 157.14
+        },
+        {
+          "code": "99223",
+          "description": "Initial hospital care, level 3",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 224.2,
+          "negotiated_max": 228.92
+        },
+        {
+          "code": "99232",
+          "description": "Subsequent hospital care, level 2",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 79.8,
+          "negotiated_max": 81.48
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 1210.0,
+          "discounted_cash_price": 1210.0,
+          "negotiated_min": 25.65,
+          "negotiated_max": 7272.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 1998.0,
+          "discounted_cash_price": 1998.0,
+          "negotiated_min": 49.4,
+          "negotiated_max": 7898.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 2866.0,
+          "discounted_cash_price": 2866.0,
+          "negotiated_min": 73.15,
+          "negotiated_max": 8681.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 4558.0,
+          "discounted_cash_price": 4558.0,
+          "negotiated_min": 135.85,
+          "negotiated_max": 9710.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 5167.0,
+          "discounted_cash_price": 5167.0,
+          "negotiated_min": 197.6,
+          "negotiated_max": 9875.0
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 7326.0,
+          "discounted_cash_price": 7326.0,
+          "negotiated_min": 249.85,
+          "negotiated_max": 9875.0
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 147.0,
+          "discounted_cash_price": 147.0,
+          "negotiated_min": 27.93,
+          "negotiated_max": 255.0
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 103.0,
+          "discounted_cash_price": 103.0,
+          "negotiated_min": 0.11,
+          "negotiated_max": 188.7
+        }
+      ]
+    },
+    {
+      "id": "hca-raulerson",
+      "name": "HCA Florida Raulerson Hospital",
+      "system": "HCA Florida Healthcare",
+      "city": "Okeechobee",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://stctrprodsnsvc00455826e6.blob.core.windows.net/pt-final-posting-files/59-1833934_HCA-FLORIDA-RAULERSON-HOSPITAL_standardcharges.json?si=dpx-pt-json-access-policy&spr=https&sv=2026-02-06&sr=c&sig=ks%2BgfAjyEHlZmeP2PYJ%2f9NpMuCoRStjTb2bhIy9Y6LM%3D",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 228.6,
+          "negotiated_max": 15153.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 309.92,
+          "negotiated_max": 15153.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 43.0,
+          "discounted_cash_price": 43.0,
+          "negotiated_min": 3.0,
+          "negotiated_max": 2702.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 8145.0,
+          "discounted_cash_price": 8145.0,
+          "negotiated_min": 185.25,
+          "negotiated_max": 6923.25
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 9633.0,
+          "discounted_cash_price": 9633.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 8188.05
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 1053.0,
+          "discounted_cash_price": 1053.0,
+          "negotiated_min": 90.56,
+          "negotiated_max": 895.05
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 1547.0,
+          "discounted_cash_price": 1547.0,
+          "negotiated_min": 133.04,
+          "negotiated_max": 1314.95
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 1960.0,
+          "discounted_cash_price": 1960.0,
+          "negotiated_min": 168.56,
+          "negotiated_max": 1666.0
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 11587.0,
+          "discounted_cash_price": 11587.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 9848.95
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 1746.0,
+          "discounted_cash_price": 1746.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 2963.1
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 1646.0,
+          "discounted_cash_price": 1646.0,
+          "negotiated_min": 137.53,
+          "negotiated_max": 2792.25
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 18870.0,
+          "discounted_cash_price": 18870.0,
+          "negotiated_min": 391.22,
+          "negotiated_max": 16039.5
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 21100.0,
+          "discounted_cash_price": 21100.0,
+          "negotiated_min": 625.8,
+          "negotiated_max": 17935.0
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 3940.0,
+          "discounted_cash_price": 3940.0,
+          "negotiated_min": 185.25,
+          "negotiated_max": 3349.0
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 1430.0,
+          "discounted_cash_price": 1430.0,
+          "negotiated_min": 7.83,
+          "negotiated_max": 1215.5
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 25.0,
+          "discounted_cash_price": 25.0,
+          "negotiated_min": 2.15,
+          "negotiated_max": 1291.15
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 16.31,
+          "discounted_cash_price": 16.31,
+          "negotiated_min": 1.4,
+          "negotiated_max": 960.5
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 575.0,
+          "discounted_cash_price": 575.0,
+          "negotiated_min": 2.93,
+          "negotiated_max": 488.75
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 533.0,
+          "discounted_cash_price": 533.0,
+          "negotiated_min": 3.63,
+          "negotiated_max": 453.05
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 23.0,
+          "discounted_cash_price": 23.0,
+          "negotiated_min": 1.98,
+          "negotiated_max": 115.32
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 1174.0,
+          "discounted_cash_price": 1174.0,
+          "negotiated_min": 15.54,
+          "negotiated_max": 997.9
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 7.19,
+          "negotiated_max": 145.76
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 95.0,
+          "discounted_cash_price": 95.0,
+          "negotiated_min": 8.17,
+          "negotiated_max": 981.75
+        },
+        {
+          "code": "93000",
+          "description": "EKG (ECG) complete with interpretation",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 12.87,
+          "negotiated_max": 353.34
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 65.0,
+          "discounted_cash_price": 65.0,
+          "negotiated_min": 5.59,
+          "negotiated_max": 966.45
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 1220.0,
+          "discounted_cash_price": 1220.0,
+          "negotiated_min": 35.15,
+          "negotiated_max": 1037.0
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 432.0,
+          "discounted_cash_price": 432.0,
+          "negotiated_min": 14.25,
+          "negotiated_max": 367.2
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 320.0,
+          "discounted_cash_price": 320.0,
+          "negotiated_min": 27.52,
+          "negotiated_max": 703.8
+        },
+        {
+          "code": "99221",
+          "description": "Initial hospital care, level 1",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 110.2,
+          "negotiated_max": 112.52
+        },
+        {
+          "code": "99222",
+          "description": "Initial hospital care, level 2",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 148.2,
+          "negotiated_max": 151.32
+        },
+        {
+          "code": "99223",
+          "description": "Initial hospital care, level 3",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 216.6,
+          "negotiated_max": 221.16
+        },
+        {
+          "code": "99232",
+          "description": "Subsequent hospital care, level 2",
+          "gross_charge": null,
+          "discounted_cash_price": null,
+          "negotiated_min": 76.95,
+          "negotiated_max": 78.57
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 786.0,
+          "discounted_cash_price": 786.0,
+          "negotiated_min": 24.7,
+          "negotiated_max": 7272.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 1377.0,
+          "discounted_cash_price": 1377.0,
+          "negotiated_min": 47.5,
+          "negotiated_max": 7898.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 2071.0,
+          "discounted_cash_price": 2071.0,
+          "negotiated_min": 70.3,
+          "negotiated_max": 8681.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 3106.0,
+          "discounted_cash_price": 3106.0,
+          "negotiated_min": 130.15,
+          "negotiated_max": 9710.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 3526.0,
+          "discounted_cash_price": 3526.0,
+          "negotiated_min": 190.0,
+          "negotiated_max": 9875.0
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 5371.0,
+          "discounted_cash_price": 5371.0,
+          "negotiated_min": 240.35,
+          "negotiated_max": 9875.0
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 190.0,
+          "discounted_cash_price": 190.0,
+          "negotiated_min": 36.1,
+          "negotiated_max": 176.8
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 2.0,
+          "discounted_cash_price": 2.0,
+          "negotiated_min": 0.11,
+          "negotiated_max": 124.95
+        }
+      ]
+    },
+    {
+      "id": "hf-holmes-regional",
+      "name": "Health First Holmes Regional Medical Center",
+      "system": "Health First",
+      "city": "Melbourne",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://www.hf.org/sites/default/files/2026-03/590624371_Holmes-Regional-Medical-Center_standardcharges.csv",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": 520.0,
+          "discounted_cash_price": 130.0,
+          "negotiated_min": 79.33,
+          "negotiated_max": 1822.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": 520.0,
+          "discounted_cash_price": 130.0,
+          "negotiated_min": 79.33,
+          "negotiated_max": 1822.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 32.2,
+          "discounted_cash_price": 8.05,
+          "negotiated_min": 2.66,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 2361.0,
+          "discounted_cash_price": 590.25,
+          "negotiated_min": 55.07,
+          "negotiated_max": 2644.32
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 3416.0,
+          "discounted_cash_price": 854.0,
+          "negotiated_min": 79.33,
+          "negotiated_max": 4411.0
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 431.0,
+          "discounted_cash_price": 107.75,
+          "negotiated_min": 23.28,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 562.0,
+          "discounted_cash_price": 140.5,
+          "negotiated_min": 30.18,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 473.0,
+          "discounted_cash_price": 118.25,
+          "negotiated_min": 17.62,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 2967.0,
+          "discounted_cash_price": 741.75,
+          "negotiated_min": 79.33,
+          "negotiated_max": 4411.0
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 418.0,
+          "discounted_cash_price": 104.5,
+          "negotiated_min": 14.38,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 401.0,
+          "discounted_cash_price": 100.25,
+          "negotiated_min": 15.46,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 3991.0,
+          "discounted_cash_price": 997.75,
+          "negotiated_min": 79.33,
+          "negotiated_max": 4469.92
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 5640.0,
+          "discounted_cash_price": 1410.0,
+          "negotiated_min": 79.33,
+          "negotiated_max": 6316.8
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 1336.0,
+          "discounted_cash_price": 334.0,
+          "negotiated_min": 66.92,
+          "negotiated_max": 1496.32
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 100.0,
+          "discounted_cash_price": 25.0,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 116.0,
+          "discounted_cash_price": 29.0,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 73.0,
+          "discounted_cash_price": 18.25,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 13.0,
+          "discounted_cash_price": 3.25,
+          "negotiated_min": 1.5,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 36.14,
+          "discounted_cash_price": 9.04,
+          "negotiated_min": 2.74,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 72.0,
+          "discounted_cash_price": 18.0,
+          "negotiated_min": 2.74,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 122.0,
+          "discounted_cash_price": 30.5,
+          "negotiated_min": 6.66,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": 98.0,
+          "discounted_cash_price": 24.5,
+          "negotiated_min": 2.97,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 135.0,
+          "discounted_cash_price": 33.75,
+          "negotiated_min": 20.11,
+          "negotiated_max": 303.0
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 322.0,
+          "discounted_cash_price": 80.5,
+          "negotiated_min": 5.75,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 454.75,
+          "discounted_cash_price": 113.69,
+          "negotiated_min": 30.25,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 232.8,
+          "discounted_cash_price": 58.2,
+          "negotiated_min": 11.94,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 245.82,
+          "discounted_cash_price": 61.46,
+          "negotiated_min": 32.32,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 691.1,
+          "discounted_cash_price": 172.78,
+          "negotiated_min": 10.7,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 1016.53,
+          "discounted_cash_price": 254.13,
+          "negotiated_min": 39.27,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 2198.64,
+          "discounted_cash_price": 549.66,
+          "negotiated_min": 67.7,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 3354.31,
+          "discounted_cash_price": 838.58,
+          "negotiated_min": 79.33,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 4245.49,
+          "discounted_cash_price": 1061.37,
+          "negotiated_min": 79.33,
+          "negotiated_max": 4754.95
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 3472.75,
+          "discounted_cash_price": 868.19,
+          "negotiated_min": 79.33,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 58.0,
+          "discounted_cash_price": 14.5,
+          "negotiated_min": 11.6,
+          "negotiated_max": 12001.0
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 15.76,
+          "discounted_cash_price": 3.94,
+          "negotiated_min": 0.09,
+          "negotiated_max": 420.58
+        }
+      ]
+    },
+    {
+      "id": "hf-palm-bay",
+      "name": "Health First Palm Bay Hospital",
+      "system": "Health First",
+      "city": "Palm Bay",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://www.hf.org/sites/default/files/2026-03/590624371_Palm-Bay-Hospital_standardcharges.csv",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": 520.0,
+          "discounted_cash_price": 130.0,
+          "negotiated_min": 62.58,
+          "negotiated_max": 1822.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": 520.0,
+          "discounted_cash_price": 130.0,
+          "negotiated_min": 62.58,
+          "negotiated_max": 1822.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 32.2,
+          "discounted_cash_price": 8.05,
+          "negotiated_min": 2.66,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 2361.0,
+          "discounted_cash_price": 590.25,
+          "negotiated_min": 55.07,
+          "negotiated_max": 2644.32
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 3416.0,
+          "discounted_cash_price": 854.0,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4411.0
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 431.0,
+          "discounted_cash_price": 107.75,
+          "negotiated_min": 23.28,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 562.0,
+          "discounted_cash_price": 140.5,
+          "negotiated_min": 30.18,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 473.0,
+          "discounted_cash_price": 118.25,
+          "negotiated_min": 17.62,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 2967.0,
+          "discounted_cash_price": 741.75,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4411.0
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 418.0,
+          "discounted_cash_price": 104.5,
+          "negotiated_min": 14.38,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 401.0,
+          "discounted_cash_price": 100.25,
+          "negotiated_min": 15.46,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 3991.0,
+          "discounted_cash_price": 997.75,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4469.92
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 5640.0,
+          "discounted_cash_price": 1410.0,
+          "negotiated_min": 62.58,
+          "negotiated_max": 6316.8
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 1336.0,
+          "discounted_cash_price": 334.0,
+          "negotiated_min": 62.58,
+          "negotiated_max": 1496.32
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 100.0,
+          "discounted_cash_price": 25.0,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 116.0,
+          "discounted_cash_price": 29.0,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 73.0,
+          "discounted_cash_price": 18.25,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 13.0,
+          "discounted_cash_price": 3.25,
+          "negotiated_min": 1.5,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 36.14,
+          "discounted_cash_price": 9.04,
+          "negotiated_min": 2.74,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 72.0,
+          "discounted_cash_price": 18.0,
+          "negotiated_min": 2.74,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 122.0,
+          "discounted_cash_price": 30.5,
+          "negotiated_min": 6.66,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": 98.0,
+          "discounted_cash_price": 24.5,
+          "negotiated_min": 2.97,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 135.0,
+          "discounted_cash_price": 33.75,
+          "negotiated_min": 20.11,
+          "negotiated_max": 303.0
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 322.0,
+          "discounted_cash_price": 80.5,
+          "negotiated_min": 5.75,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 454.75,
+          "discounted_cash_price": 113.69,
+          "negotiated_min": 30.25,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 232.8,
+          "discounted_cash_price": 58.2,
+          "negotiated_min": 11.94,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 245.82,
+          "discounted_cash_price": 61.46,
+          "negotiated_min": 32.32,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 691.1,
+          "discounted_cash_price": 172.78,
+          "negotiated_min": 10.7,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 1016.53,
+          "discounted_cash_price": 254.13,
+          "negotiated_min": 39.27,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 2198.64,
+          "discounted_cash_price": 549.66,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 3354.31,
+          "discounted_cash_price": 838.58,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 4245.49,
+          "discounted_cash_price": 1061.37,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4754.95
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 3472.75,
+          "discounted_cash_price": 868.19,
+          "negotiated_min": 62.58,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 58.0,
+          "discounted_cash_price": 14.5,
+          "negotiated_min": 11.6,
+          "negotiated_max": 12001.0
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 15.76,
+          "discounted_cash_price": 3.94,
+          "negotiated_min": 0.09,
+          "negotiated_max": 420.58
+        }
+      ]
+    },
+    {
+      "id": "hf-viera",
+      "name": "Health First Viera Hospital",
+      "system": "Health First",
+      "city": "Viera/Melbourne",
+      "state": "FL",
+      "status": "available",
+      "source_file_url": "https://www.hf.org/sites/default/files/2026-03/264019868_Viera-Hospital_standardcharges.csv",
+      "retrieval_date": "2026-10-26",
+      "extraction_date": "2026-10-26",
+      "lines": [
+        {
+          "code": "12001",
+          "description": "Simple laceration repair, scalp/neck/etc <=2.5cm",
+          "gross_charge": 520.0,
+          "discounted_cash_price": 130.0,
+          "negotiated_min": 100.69,
+          "negotiated_max": 1822.0
+        },
+        {
+          "code": "12002",
+          "description": "Simple laceration repair, 2.6-7.5cm",
+          "gross_charge": 520.0,
+          "discounted_cash_price": 130.0,
+          "negotiated_min": 111.49,
+          "negotiated_max": 1822.0
+        },
+        {
+          "code": "36415",
+          "description": "Venipuncture (routine blood draw)",
+          "gross_charge": 32.2,
+          "discounted_cash_price": 8.05,
+          "negotiated_min": 2.66,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "70450",
+          "description": "CT head/brain without contrast",
+          "gross_charge": 2361.0,
+          "discounted_cash_price": 590.25,
+          "negotiated_min": 55.07,
+          "negotiated_max": 2644.32
+        },
+        {
+          "code": "70551",
+          "description": "MRI brain without contrast",
+          "gross_charge": 3416.0,
+          "discounted_cash_price": 854.0,
+          "negotiated_min": 111.49,
+          "negotiated_max": 4411.0
+        },
+        {
+          "code": "71045",
+          "description": "Chest X-ray 1 view",
+          "gross_charge": 431.0,
+          "discounted_cash_price": 107.75,
+          "negotiated_min": 22.11,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "71046",
+          "description": "Chest X-ray 2 views",
+          "gross_charge": 562.0,
+          "discounted_cash_price": 140.5,
+          "negotiated_min": 28.68,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "72100",
+          "description": "X-ray lumbar spine",
+          "gross_charge": 473.0,
+          "discounted_cash_price": 118.25,
+          "negotiated_min": 17.62,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "72148",
+          "description": "MRI lumbar spine without contrast",
+          "gross_charge": 2967.0,
+          "discounted_cash_price": 741.75,
+          "negotiated_min": 111.11,
+          "negotiated_max": 4411.0
+        },
+        {
+          "code": "73030",
+          "description": "X-ray shoulder",
+          "gross_charge": 418.0,
+          "discounted_cash_price": 104.5,
+          "negotiated_min": 14.38,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "73630",
+          "description": "X-ray foot",
+          "gross_charge": 401.0,
+          "discounted_cash_price": 100.25,
+          "negotiated_min": 15.46,
+          "negotiated_max": 619.0
+        },
+        {
+          "code": "74176",
+          "description": "CT abdomen and pelvis without contrast",
+          "gross_charge": 3991.0,
+          "discounted_cash_price": 997.75,
+          "negotiated_min": 84.44,
+          "negotiated_max": 4469.92
+        },
+        {
+          "code": "74177",
+          "description": "CT abdomen and pelvis with contrast",
+          "gross_charge": 5640.0,
+          "discounted_cash_price": 1410.0,
+          "negotiated_min": 111.49,
+          "negotiated_max": 6316.8
+        },
+        {
+          "code": "76700",
+          "description": "Abdominal ultrasound complete",
+          "gross_charge": 1336.0,
+          "discounted_cash_price": 334.0,
+          "negotiated_min": 66.92,
+          "negotiated_max": 1496.32
+        },
+        {
+          "code": "80048",
+          "description": "Basic metabolic panel",
+          "gross_charge": 100.0,
+          "discounted_cash_price": 25.0,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "80053",
+          "description": "Comprehensive metabolic panel",
+          "gross_charge": 116.0,
+          "discounted_cash_price": 29.0,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "80061",
+          "description": "Lipid panel",
+          "gross_charge": 73.0,
+          "discounted_cash_price": 18.25,
+          "negotiated_min": 4.55,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "81001",
+          "description": "Urinalysis with microscopy",
+          "gross_charge": 13.0,
+          "discounted_cash_price": 3.25,
+          "negotiated_min": 1.5,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "82947",
+          "description": "Glucose blood test",
+          "gross_charge": 36.14,
+          "discounted_cash_price": 9.04,
+          "negotiated_min": 2.74,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "83036",
+          "description": "Hemoglobin A1c",
+          "gross_charge": 72.0,
+          "discounted_cash_price": 18.0,
+          "negotiated_min": 2.74,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "84443",
+          "description": "TSH (thyroid stimulating hormone)",
+          "gross_charge": 122.0,
+          "discounted_cash_price": 30.5,
+          "negotiated_min": 6.66,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "85025",
+          "description": "CBC with differential",
+          "gross_charge": 98.0,
+          "discounted_cash_price": 24.5,
+          "negotiated_min": 2.97,
+          "negotiated_max": 402.0
+        },
+        {
+          "code": "90471",
+          "description": "Immunization administration (one vaccine)",
+          "gross_charge": 135.0,
+          "discounted_cash_price": 33.75,
+          "negotiated_min": 19.1,
+          "negotiated_max": 303.0
+        },
+        {
+          "code": "93005",
+          "description": "EKG tracing only (no interpretation)",
+          "gross_charge": 322.0,
+          "discounted_cash_price": 80.5,
+          "negotiated_min": 5.75,
+          "negotiated_max": 652.0
+        },
+        {
+          "code": "96360",
+          "description": "IV hydration, initial 31-60 min",
+          "gross_charge": 454.75,
+          "discounted_cash_price": 113.69,
+          "negotiated_min": 28.74,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "96361",
+          "description": "IV hydration, each additional hour",
+          "gross_charge": 232.8,
+          "discounted_cash_price": 58.2,
+          "negotiated_min": 11.34,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "96374",
+          "description": "IV push, single drug",
+          "gross_charge": 245.82,
+          "discounted_cash_price": 61.46,
+          "negotiated_min": 32.32,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "99281",
+          "description": "ER visit, E/M level 1 (minor)",
+          "gross_charge": 691.1,
+          "discounted_cash_price": 172.78,
+          "negotiated_min": 10.17,
+          "negotiated_max": 1123.0
+        },
+        {
+          "code": "99282",
+          "description": "ER visit, E/M level 2 (low)",
+          "gross_charge": 1016.53,
+          "discounted_cash_price": 254.13,
+          "negotiated_min": 37.31,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99283",
+          "description": "ER visit, E/M level 3 (moderate)",
+          "gross_charge": 2198.64,
+          "discounted_cash_price": 549.66,
+          "negotiated_min": 64.31,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99284",
+          "description": "ER visit, E/M level 4 (high)",
+          "gross_charge": 3354.31,
+          "discounted_cash_price": 838.58,
+          "negotiated_min": 109.64,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "99285",
+          "description": "ER visit, E/M level 5 (high/complex)",
+          "gross_charge": 4245.49,
+          "discounted_cash_price": 1061.37,
+          "negotiated_min": 111.49,
+          "negotiated_max": 4754.95
+        },
+        {
+          "code": "99291",
+          "description": "Critical care, first hour",
+          "gross_charge": 3472.75,
+          "discounted_cash_price": 868.19,
+          "negotiated_min": 111.49,
+          "negotiated_max": 4111.0
+        },
+        {
+          "code": "G0378",
+          "description": "Hospital observation services, per hour",
+          "gross_charge": 58.0,
+          "discounted_cash_price": 14.5,
+          "negotiated_min": 11.6,
+          "negotiated_max": 12001.0
+        },
+        {
+          "code": "J1100",
+          "description": "Injection, dexamethasone sodium phosphate",
+          "gross_charge": 15.76,
+          "discounted_cash_price": 3.94,
+          "negotiated_min": 0.09,
+          "negotiated_max": 420.58
+        }
+      ]
+    },
+    {
+      "id": "sebastian-river",
+      "name": "Sebastian River Medical Center (Orlando Health Sebastian River Hospital)",
+      "system": "Orlando Health",
+      "city": "Sebastian",
+      "state": "FL",
+      "status": "not_available",
+      "unavailable_reason": "orlandohealth.com blocked every automated request with an anti-bot checkpoint (HTTP 429); no price file could be retrieved.",
+      "lines": []
+    },
+    {
+      "id": "rockledge-regional",
+      "name": "Rockledge Regional Medical Center",
+      "system": "Orlando Health",
+      "city": "Rockledge",
+      "state": "FL",
+      "status": "not_available",
+      "unavailable_reason": "Facility permanently closed 2025-04-23; no current price file exists.",
+      "lines": []
+    }
+  ]
+}

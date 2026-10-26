@@ -16,10 +16,20 @@ npm install
 cp .env.example .env.local
 ```
 
-Edit `.env.local` and paste your Anthropic API key:
+Edit `.env.local` and paste your Anthropic API key, plus set a real beta
+access code (comma-separate several if you want more than one):
 ```
 ANTHROPIC_API_KEY=sk-ant-your-key-here
+BETA_CODES=some-secret-code,another-secret-code
+DAILY_CAP_PER_CODE=20
 ```
+
+**`BETA_CODES` is required.** Until real payments are wired up, every
+AI-powered call (`/api/analyze`, `/api/bill-letter`) is rejected with 401
+unless the request includes one of these codes — this is what stops a
+stranger from running up your Anthropic bill. Keep it secret; don't commit
+real codes. See `api/_lib/auth.js` for what the per-code daily cap can and
+cannot guarantee on Vercel's serverless runtime.
 
 Run locally:
 ```bash
@@ -55,8 +65,9 @@ git push -u origin main
 3. Vercel will auto-detect Vite — no build settings to change
 4. Before clicking Deploy, click **Environment Variables**
 5. Add:
-   - Key: `ANTHROPIC_API_KEY`
-   - Value: your API key from console.anthropic.com
+   - Key: `ANTHROPIC_API_KEY` — your API key from console.anthropic.com
+   - Key: `BETA_CODES` — a comma-separated list of real access codes (required — see Step 1)
+   - Key: `DAILY_CAP_PER_CODE` — optional, defaults to 20
 6. Click **Deploy**
 
 Your app will be live at `billshield.vercel.app` in ~60 seconds.
@@ -72,15 +83,13 @@ Your app will be live at `billshield.vercel.app` in ~60 seconds.
 
 ---
 
-## Step 5 — Connect Stripe (to collect payments)
+## Step 5 — Payments (not implemented yet)
 
-1. Sign up at stripe.com
-2. Get your **Publishable Key** and **Secret Key** from the Stripe dashboard
-3. Add to Vercel Environment Variables:
-   - `STRIPE_SECRET_KEY=sk_live_...`
-   - `VITE_STRIPE_PUBLISHABLE_KEY=pk_live_...`
-4. In `src/App.jsx`, the tier selection screen has a note showing where to integrate
-5. Add a Stripe Checkout session in `api/create-checkout.js` (see Stripe docs)
+Paid tiers are currently gated by a `BETA_CODES` access code instead of real
+payment, specifically so this app can't run up Anthropic API costs with no
+revenue behind it. When real payments are built (e.g. Stripe), the checkout
+flow should mint/verify entitlement and that should replace — not sit
+alongside — the beta access code gate in `api/_lib/auth.js`.
 
 ---
 
@@ -89,10 +98,20 @@ Your app will be live at `billshield.vercel.app` in ~60 seconds.
 ```
 billshield/
 ├── api/
-│   └── analyze.js          ← Vercel serverless function (keeps API key secure)
+│   ├── analyze.js          ← General bill analysis (beta-code gated)
+│   ├── bill-letter.js       ← "Check My Bill" dispute letter (beta-code gated)
+│   └── _lib/                ← auth, Anthropic call wrapper, hospital data loader
+├── data/
+│   ├── hospital-prices.json          ← public price-transparency dataset
+│   ├── hospital-prices.internal.json ← internal only, has negotiated min/max
+│   └── README.md                     ← what's in it, what's excluded, why
+├── scripts/
+│   ├── build-hospital-prices.py      ← regenerates data/ from a spike directory
+│   └── verify-model.mjs              ← 3 live test calls with a fictional bill
 ├── src/
-│   ├── main.jsx            ← React entry point
-│   ├── App.jsx             ← Full app (Landing, Analyze, Results)
+│   ├── main.jsx            ← React entry point (+ Vercel Analytics)
+│   ├── App.jsx             ← Full app (Landing, Analyze, Check My Bill, Results, legal pages)
+│   ├── lib/billMath.js      ← pure hospital lookup/diff math (unit tested)
 │   └── index.css           ← All styles
 ├── public/
 │   └── shield.svg          ← Favicon

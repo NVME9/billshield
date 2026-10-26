@@ -1,4 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
+import hospitalPriceData from '../data/hospital-prices.json'
+import { listHospitals, getHospitalById, matchBillLines } from './lib/billMath.js'
+
+const LAST_UPDATED = 'October 26, 2026'
+const CONTACT_EMAIL = 'getvaluiq@gmail.com'
 
 // ── Shield Score Ring ──────────────────────────────────────────────────────────
 function ShieldRing({ score }) {
@@ -19,15 +24,30 @@ function ShieldRing({ score }) {
   )
 }
 
+// ── Shared footer ──────────────────────────────────────────────────────────────
+function SiteFooter({ onPrivacy, onTerms, onContact }) {
+  return (
+    <footer>
+      <div className="fl">Bill<span>Shield</span></div>
+      <div className="f-links">
+        <button className="f-link" onClick={onPrivacy}>Privacy</button>
+        <button className="f-link" onClick={onTerms}>Terms</button>
+        <button className="f-link" onClick={onContact}>Contact</button>
+      </div>
+      <p className="disclaimer">BillShield is not a law firm and does not provide legal, medical, or financial advice. We do not guarantee any savings. We help you understand your bill and communicate with billing departments. Always consult a qualified attorney for legal matters.</p>
+    </footer>
+  )
+}
+
 // ── Landing Page ───────────────────────────────────────────────────────────────
-function Landing({ onStart, onPricing, onB2B }) {
+function Landing({ onStart, onPricing, onB2B, onCheckBill, onPrivacy, onTerms, onContact }) {
   const [b2bSent, setB2bSent] = useState(false)
   const [b2b, setB2b] = useState({ name: '', org: '', email: '', size: '' })
 
   const plans = [
-    { name: 'Free', price: '$0', sub: '', desc: 'Get a basic bill explanation and Shield Score overview.', features: ['Bill explanation in plain English', 'Shield Score overview', 'General negotiation tips', '1 analysis per month'], hot: false, badge: null, cta: 'Get Started', onClick: onStart },
-    { name: 'Basic', price: '$19', sub: 'one-time', desc: 'Everything you need to dispute a single bill.', features: ['Full red flag scan', 'Personalized dispute letter', 'Phone call script', 'State-specific rights', 'Action plan'], hot: true, badge: 'Most Popular', cta: 'Get Started', onClick: onStart },
-    { name: 'Unlimited', price: '$49', sub: '/mo', desc: 'For ongoing medical situations or managing bills for your family.', features: ['Unlimited bill analyses', 'Everything in Basic', 'Priority AI analysis', 'Progress tracking', 'Cancel anytime'], hot: false, badge: null, cta: 'Subscribe', onClick: onStart },
+    { name: 'Free', price: '$0', sub: '', desc: 'Get a basic bill explanation and Shield Score overview.', features: ['Bill explanation in plain English', 'Shield Score overview', 'General negotiation tips'], hot: false, badge: null, cta: 'Get Started', onClick: onStart },
+    { name: 'Basic', price: '$19', sub: 'one-time (beta: access code instead)', desc: 'Everything you need to dispute a single bill.', features: ['Full red flag scan', 'Personalized dispute letter', 'Phone call script', 'State-specific rights', 'Action plan'], hot: true, badge: 'Most Popular', cta: 'Get Started', onClick: onStart },
+    { name: 'Unlimited', price: '$49', sub: '/mo (beta: access code instead)', desc: 'For ongoing medical situations or managing bills for your family.', features: ['Unlimited bill analyses', 'Everything in Basic', 'Priority AI analysis', 'Progress tracking'], hot: false, badge: null, cta: 'Subscribe', onClick: onStart },
     { name: 'Enterprise', price: 'Custom', sub: '', desc: 'For patient advocacy orgs, HR departments, and elder care facilities.', features: ['White-label option', 'Bulk bill analysis', 'API access', 'Dedicated account manager', 'Custom integrations'], hot: false, badge: null, cta: 'Contact Us', onClick: onB2B },
   ]
 
@@ -36,8 +56,8 @@ function Landing({ onStart, onPricing, onB2B }) {
     ['📄', 'Dispute Letter Generator', 'A professional, legally-worded letter tailored to your situation — ready to mail or email today.'],
     ['📞', 'Phone Script', 'Exactly what to say when you call billing, including how to handle common pushback.'],
     ['🧾', 'Bill Explainer', 'Plain-English breakdown of every line item and medical code — no decoder ring needed.'],
-    ['📊', 'Shield Score', 'A 0–100 legitimacy rating so you instantly know how hard to push and what you\'re likely to recover.'],
-    ['🏛️', 'Patient Rights Guide', 'Your rights by state, including balance billing protections, charity care laws, and dispute timelines.'],
+    ['📊', 'Shield Score', 'A 0–100 legitimacy rating so you instantly know how hard to push.'],
+    ['🏥', 'Check My Bill', "Compare your charges directly against a hospital's own published cash prices — no AI, no cost, just their own numbers."],
   ]
 
   return (
@@ -53,6 +73,7 @@ function Landing({ onStart, onPricing, onB2B }) {
           Bill<span>Shield</span>
         </button>
         <div className="nav-links">
+          <button className="nav-link" onClick={onCheckBill}>Check My Bill</button>
           <button className="nav-link" onClick={onPricing}>Pricing</button>
           <button className="nav-link" onClick={onB2B}>For Organizations</button>
         </div>
@@ -61,15 +82,15 @@ function Landing({ onStart, onPricing, onB2B }) {
 
       {/* HERO */}
       <div className="hero">
-        <div className="eyebrow">⚡ 80% of medical bills contain errors</div>
-        <h1>Your medical bill is probably <em>wrong.</em> We&apos;ll prove it.</h1>
-        <p className="hero-sub">Upload your bill, get an AI-powered red flag scan, a ready-to-send dispute letter, and a phone script — in under 2 minutes.</p>
+        <div className="eyebrow">⚡ Federal law requires hospitals to publish their own prices</div>
+        <h1>Understand your medical bill. <em>Compare it to the hospital's own numbers.</em></h1>
+        <p className="hero-sub">Upload your bill, get an AI-powered red flag scan, a ready-to-send dispute letter, and a phone script — or compare your charges directly against a hospital's federally-required price file, free.</p>
         <div className="hero-btns">
           <button className="btn-p" onClick={onStart}>Analyze My Bill Free →</button>
-          <button className="btn-s" onClick={onPricing}>See Pricing</button>
+          <button className="btn-s" onClick={onCheckBill}>Check My Bill Against Hospital Prices</button>
         </div>
         <div className="hero-stats">
-          {[['$450','Avg savings per bill'],['80%','Bills have errors'],['2 min','To your dispute letter']].map(([n,l]) => (
+          {[['45 CFR §180.50', 'Federal rule requires hospitals to post prices'], ['Plain English', 'Every charge explained'], ['$0', 'To see your Shield Score']].map(([n, l]) => (
             <div className="stat" key={l}><div className="num">{n}</div><div className="lbl">{l}</div></div>
           ))}
         </div>
@@ -100,7 +121,7 @@ function Landing({ onStart, onPricing, onB2B }) {
         <div className="section">
           <div className="s-label">What you get</div>
           <h2 className="s-title fraunces">Everything you need to win</h2>
-          <p className="s-sub">The same tools billing specialists use — without taking 30% of your savings.</p>
+          <p className="s-sub">Tools billing specialists use — without taking a cut of your savings.</p>
           <div className="feat-grid">
             {features.map(([icon, t, d]) => (
               <div className="feat-card" key={t}>
@@ -118,7 +139,7 @@ function Landing({ onStart, onPricing, onB2B }) {
         <div className="price-inner">
           <div className="s-label" style={{ color: 'rgba(255,255,255,.5)', textAlign: 'center' }}>Pricing</div>
           <h2 className="fraunces" style={{ color: '#fff', fontSize: 'clamp(1.8rem,3vw,2.4rem)', textAlign: 'center' }}>Simple, transparent pricing</h2>
-          <p style={{ color: 'rgba(255,255,255,.5)', textAlign: 'center', marginTop: '.5rem' }}>Pay $19 once. Save hundreds. Do the math.</p>
+          <p style={{ color: 'rgba(255,255,255,.5)', textAlign: 'center', marginTop: '.5rem' }}>BillShield is in a free beta. Paid tiers aren't charging yet — they currently unlock with a beta access code instead.</p>
           <div className="price-grid">
             {plans.map(p => (
               <div className={`plan${p.hot ? ' hot' : ''}`} key={p.name}>
@@ -139,7 +160,7 @@ function Landing({ onStart, onPricing, onB2B }) {
         <div className="b2b-inner">
           <div className="s-label" style={{ color: 'rgba(255,255,255,.5)' }}>For Organizations</div>
           <h2 className="fraunces" style={{ color: '#fff', fontSize: 'clamp(1.8rem,3vw,2.4rem)' }}>Built for organizations who serve patients</h2>
-          <p style={{ color: 'rgba(255,255,255,.5)', marginTop: '.5rem', lineHeight: 1.75 }}>Patient advocacy groups, elder care facilities, HR departments, and credit unions use BillShield to help the people they serve recover millions in billing errors.</p>
+          <p style={{ color: 'rgba(255,255,255,.5)', marginTop: '.5rem', lineHeight: 1.75 }}>Patient advocacy groups, elder care facilities, HR departments, and credit unions use BillShield to help the people they serve understand and question their medical bills.</p>
           <div className="b2b-form">
             {b2bSent
               ? <div className="b2b-sent">✅ Thanks! We&apos;ll be in touch within one business day.</div>
@@ -157,22 +178,34 @@ function Landing({ onStart, onPricing, onB2B }) {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <footer>
-        <div className="fl">Bill<span>Shield</span></div>
-        <div className="f-links">
-          <button className="f-link">Privacy</button>
-          <button className="f-link">Terms</button>
-          <button className="f-link">Contact</button>
-        </div>
-        <p className="disclaimer">BillShield is not a law firm and does not provide legal advice. We help you understand your bill and communicate with billing departments. Always consult a qualified attorney for legal matters.</p>
-      </footer>
+      <SiteFooter onPrivacy={onPrivacy} onTerms={onTerms} onContact={onContact} />
+    </div>
+  )
+}
+
+// ── Beta access code field (shared) ─────────────────────────────────────────
+function BetaCodeField({ value, onChange, helperText }) {
+  return (
+    <div className="fg">
+      <label>Beta access code</label>
+      <input
+        className="fi"
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        placeholder="e.g. BETA-1234"
+        maxLength={100}
+      />
+      <p style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.4rem', lineHeight: 1.5 }}>
+        {helperText || <>BillShield is in a free beta behind an access code while real payments are built. Don&apos;t have one? Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</>}
+      </p>
     </div>
   )
 }
 
 // ── Analyze Flow ───────────────────────────────────────────────────────────────
-function Analyze({ onBack, onComplete }) {
+const MAX_BILL_TEXT = 12000
+
+function Analyze({ onBack, onComplete, betaCode, onBetaCodeChange }) {
   const [step, setStep] = useState(1)
   const [method, setMethod] = useState('text')
   const [billText, setBillText] = useState('')
@@ -200,7 +233,7 @@ function Analyze({ onBack, onComplete }) {
         const c = await pg.getTextContent()
         txt += c.items.map(x => x.str).join(' ') + '\n'
       }
-      setPdfText(txt || `[PDF: ${file.name} — no text extracted. Describe charges below.]`)
+      setPdfText((txt || `[PDF: ${file.name} — no text extracted. Describe charges below.]`).slice(0, MAX_BILL_TEXT))
     } catch {
       setPdfText(`[Could not read PDF. Please describe your bill manually.]`)
     } finally {
@@ -210,14 +243,15 @@ function Analyze({ onBack, onComplete }) {
 
   const ok1 = method === 'text' ? billText.trim().length > 15 : (pdfText.length > 0 && !pdfLoading)
   const ok2 = providerType && insuranceStatus && billAmount
-  const go = () => onComplete({ rawText: method === 'text' ? billText : pdfText, providerType, insuranceStatus, billAmount, context, tier })
+  const ok3 = tier === 'free' || betaCode.trim().length > 0
+  const go = () => onComplete({ rawText: (method === 'text' ? billText : pdfText).slice(0, MAX_BILL_TEXT), providerType, insuranceStatus, billAmount, context, tier, code: betaCode.trim() })
 
   const providers = [['hospital','Hospital (inpatient)'],['er','Emergency Room'],['specialist','Specialist / Outpatient'],['lab','Lab / Diagnostic'],['urgent_care','Urgent Care'],['surgery_center','Surgery Center'],['dental','Dental'],['other','Other']]
   const insurance = [['insured','Fully insured'],['underinsured','Underinsured / High deductible'],['uninsured','Uninsured / Self-pay'],['medicare','Medicare / Medicaid']]
   const tiers = [
     { id: 'free', name: 'Free Analysis', price: '$0', desc: 'Basic bill explanation + Shield Score overview' },
-    { id: 'basic', name: 'Full Dispute Kit', price: '$19 one-time', desc: 'Red flag scan + dispute letter + phone script', badge: 'Most Popular' },
-    { id: 'unlimited', name: 'Unlimited', price: '$49/mo', desc: 'Unlimited analyses for ongoing or family bills' },
+    { id: 'basic', name: 'Full Dispute Kit', price: 'Beta — access code', desc: 'Red flag scan + dispute letter + phone script', badge: 'Most Popular' },
+    { id: 'unlimited', name: 'Unlimited', price: 'Beta — access code', desc: 'For ongoing or family bills, during the beta' },
   ]
 
   return (
@@ -255,8 +289,9 @@ function Analyze({ onBack, onComplete }) {
             {method === 'text' && (
               <div className="fg">
                 <label>Paste your bill details or describe the charges</label>
-                <textarea className="ft" value={billText} onChange={e => setBillText(e.target.value)}
+                <textarea className="ft" value={billText} maxLength={MAX_BILL_TEXT} onChange={e => setBillText(e.target.value)}
                   placeholder="e.g. Emergency room visit March 12. Charged: ER facility fee $2,800, Physician $450, CT scan $1,200, Lab work $380, IV administration $290 listed twice..." />
+                <p style={{ fontSize: '.78rem', color: 'var(--muted)', marginTop: '.3rem', textAlign: 'right' }}>{billText.length.toLocaleString()} / {MAX_BILL_TEXT.toLocaleString()}</p>
               </div>
             )}
             <button className="btn-next" disabled={!ok1} onClick={() => setStep(2)}>Continue →</button>
@@ -284,11 +319,11 @@ function Analyze({ onBack, onComplete }) {
             </div>
             <div className="fg">
               <label>Total amount billed</label>
-              <input className="fi" value={billAmount} onChange={e => setBillAmount(e.target.value)} placeholder="e.g. $3,450" />
+              <input className="fi" value={billAmount} onChange={e => setBillAmount(e.target.value)} placeholder="e.g. $3,450" maxLength={100} />
             </div>
             <div className="fg">
               <label>Anything else we should know? (optional)</label>
-              <textarea className="ft" style={{ minHeight: 90 }} value={context} onChange={e => setContext(e.target.value)}
+              <textarea className="ft" style={{ minHeight: 90 }} value={context} maxLength={2000} onChange={e => setContext(e.target.value)}
                 placeholder="e.g. Never signed a financial agreement, was unconscious when admitted, procedure was labeled elective but was urgent..." />
             </div>
             <button className="btn-next" disabled={!ok2} onClick={() => setStep(3)}>Continue →</button>
@@ -299,7 +334,7 @@ function Analyze({ onBack, onComplete }) {
           <>
             <div className="az-label">Step 3 of 3</div>
             <h2 className="az-title fraunces">Choose your plan</h2>
-            <p className="az-sub">Start free to see your Shield Score, or unlock the full dispute toolkit immediately.</p>
+            <p className="az-sub">Start free to see your Shield Score, or unlock the full dispute toolkit with a beta access code.</p>
             <div className="tier-list">
               {tiers.map(t => (
                 <div key={t.id} className={`tier-item${tier === t.id ? ' sel' : ''}`} onClick={() => setTier(t.id)}>
@@ -312,12 +347,15 @@ function Analyze({ onBack, onComplete }) {
               ))}
             </div>
             {tier !== 'free' && (
-              <div className="stripe-note">
-                💳 <strong>Stripe:</strong> Replace <code>YOUR_STRIPE_KEY</code> in <code>src/stripe.js</code> with your publishable key to enable live payments.
-              </div>
+              <>
+                <div className="stripe-note">
+                  🔑 <strong>Beta:</strong> BillShield isn&apos;t charging for paid tiers yet. Enter a beta access code below to run the full AI analysis. No payment is collected.
+                </div>
+                <BetaCodeField value={betaCode} onChange={onBetaCodeChange} />
+              </>
             )}
-            <button className="btn-next" onClick={go}>
-              {tier === 'free' ? 'Analyze My Bill Free →' : `Analyze My Bill (${tier === 'basic' ? '$19' : '$49/mo'}) →`}
+            <button className="btn-next" disabled={!ok3} onClick={go}>
+              {tier === 'free' ? 'Analyze My Bill Free →' : 'Run Full Analysis →'}
             </button>
           </>
         )}
@@ -327,11 +365,13 @@ function Analyze({ onBack, onComplete }) {
 }
 
 // ── Processing ─────────────────────────────────────────────────────────────────
+const PROCESSING_STEPS = ['Parsing your bill…', 'Scanning for red flags…', 'Drafting dispute letter…', 'Building your action plan…']
+
 function Processing() {
   const [active, setActive] = useState(0)
-  const steps = ['Parsing your bill…', 'Scanning for red flags…', 'Drafting dispute letter…', 'Building your action plan…']
+  const steps = PROCESSING_STEPS
   useEffect(() => {
-    const t = setInterval(() => setActive(s => Math.min(s + 1, steps.length - 1)), 2400)
+    const t = setInterval(() => setActive(s => Math.min(s + 1, PROCESSING_STEPS.length - 1)), 2400)
     return () => clearInterval(t)
   }, [])
   return (
@@ -357,8 +397,23 @@ function Processing() {
   )
 }
 
+// ── Error view (replaces the old silent canned-fallback behavior) ─────────────
+function AnalysisError({ message, onRetry, onHome }) {
+  return (
+    <div className="proc-root">
+      <div style={{ fontSize: '2.5rem' }}>⚠️</div>
+      <div className="proc-title fraunces">We couldn&apos;t complete that analysis</div>
+      <div className="proc-sub" style={{ maxWidth: 420 }}>{message}</div>
+      <div className="hero-btns">
+        <button className="btn-p" onClick={onRetry}>Try Again</button>
+        <button className="btn-s" onClick={onHome}>Back to Home</button>
+      </div>
+    </div>
+  )
+}
+
 // ── Results ────────────────────────────────────────────────────────────────────
-function Results({ results, tier, onNew }) {
+function Results({ results, tier, onNew, onUpgrade }) {
   const [tab, setTab] = useState('flags')
   const [copied, setCopied] = useState('')
   const paid = tier !== 'free'
@@ -377,7 +432,6 @@ function Results({ results, tier, onNew }) {
           <div className="res-head-text">
             <h2 className="fraunces">Your BillShield Report</h2>
             <p>{results.summary}</p>
-            <div className="sav-pill">💰 Potential savings: {results.totalPotentialSavings}</div>
           </div>
         </div>
       </div>
@@ -399,7 +453,6 @@ function Results({ results, tier, onNew }) {
                   <span className={`sev ${f.severity}`}>{sevLabel[f.severity]}</span>
                 </div>
                 <p>{f.description}</p>
-                {f.potentialSavings && <div className="flag-sav">Potential savings: {f.potentialSavings}</div>}
               </div>
             )) : (
               <div className="flag" style={{ textAlign: 'center', padding: '2rem' }}>
@@ -412,8 +465,8 @@ function Results({ results, tier, onNew }) {
               <div className="lock-box">
                 <div className="lock-icon">🔒</div>
                 <h3 className="lock-title fraunces">Unlock your full dispute toolkit</h3>
-                <p className="lock-desc">Get your personalized dispute letter, phone script, and action plan for a one-time $19.</p>
-                <button className="unlock-btn">Unlock for $19 →</button>
+                <p className="lock-desc">Get your personalized dispute letter, phone script, and action plan with a beta access code.</p>
+                <button className="unlock-btn" onClick={onUpgrade}>Unlock Full Analysis →</button>
               </div>
             )}
           </div>
@@ -456,106 +509,305 @@ function Results({ results, tier, onNew }) {
 }
 
 // ── Static Free Tier Results (no API call, zero cost) ─────────────────────────
+// No dollar figures here — we don't have hospital-specific data for this flow,
+// so we describe issue patterns qualitatively instead of inventing savings
+// estimates. For real dollar comparisons, see the "Check My Bill" flow, which
+// uses each hospital's own published cash price.
 const FREE_RESULTS = {
   hospital: {
     shieldScore: 51,
-    summary: 'Hospital bills are among the most error-prone in the industry. We found common issues that frequently appear on inpatient bills — including charges worth challenging before you pay anything.',
+    summary: 'Hospital bills commonly contain certain patterns worth double-checking before you pay — including a few charge types that are frequently worth questioning.',
     redFlags: [
-      { issue: 'Duplicate room & board charge', description: 'Hospital stays are frequently billed with overlapping room charges, especially around admission and discharge dates. This is one of the top errors on inpatient bills.', severity: 'high', potentialSavings: '$300–800' },
-      { issue: 'Itemized supply charges not justified', description: 'Hospitals often charge $15–50 for individual items like gloves, gowns, or saline that should be bundled into the facility fee. These are routinely removed on request.', severity: 'medium', potentialSavings: '$100–400' },
-      { issue: 'Physician fee billed separately without notice', description: 'Doctors who treated you in the hospital may bill separately from the hospital itself, sometimes out-of-network even when the hospital is in-network.', severity: 'medium', potentialSavings: '$150–500' },
+      { issue: 'Duplicate room & board charge', description: 'Hospital stays are frequently billed with overlapping room charges, especially around admission and discharge dates. Request an itemized bill to check for this.', severity: 'high' },
+      { issue: 'Itemized supply charges not justified', description: 'Hospitals sometimes charge separately for individual items like gloves, gowns, or saline that are typically bundled into the facility fee. Ask for justification or removal.', severity: 'medium' },
+      { issue: 'Physician fee billed separately without notice', description: 'Doctors who treated you in the hospital may bill separately from the hospital itself, sometimes out-of-network even when the hospital is in-network.', severity: 'medium' },
     ],
-    totalPotentialSavings: '$550–1,700',
   },
   er: {
     shieldScore: 47,
-    summary: 'Emergency room bills have the highest error rate of any medical bill type. Multiple providers, facility fees, and rushed billing make ER charges particularly worth disputing.',
+    summary: 'Emergency room bills involve multiple providers and facility fees, which makes careful review worthwhile.',
     redFlags: [
-      { issue: 'Facility fee on top of physician fee', description: 'ER visits commonly generate two separate bills — one from the hospital and one from the ER physician group. The facility fee alone can often be negotiated down significantly.', severity: 'high', potentialSavings: '$400–1,200' },
-      { issue: 'Level of care may be overcoded', description: 'ER visits are billed on a scale from Level 1–5. Hospitals routinely bill Level 4 or 5 when a lower level is more appropriate. This is one of the most disputed charges in healthcare.', severity: 'high', potentialSavings: '$200–600' },
-      { issue: 'Medications billed at retail markup', description: 'Hospitals frequently charge 10–100x the actual cost of medications administered in the ER. Request an itemized breakdown of every drug charge.', severity: 'medium', potentialSavings: '$50–300' },
+      { issue: 'Facility fee on top of physician fee', description: 'ER visits commonly generate two separate bills — one from the hospital and one from the ER physician group. Ask for an itemized breakdown of each.', severity: 'high' },
+      { issue: 'Level of care may be overcoded', description: 'ER visits are billed on a scale from Level 1–5. Ask your provider to explain why a given level was chosen and request the supporting documentation.', severity: 'high' },
+      { issue: 'Medications billed at retail markup', description: 'Hospital-administered medication charges can be marked up well above the drug\'s actual cost. Request an itemized breakdown of every drug charge.', severity: 'medium' },
     ],
-    totalPotentialSavings: '$650–2,100',
   },
   specialist: {
     shieldScore: 58,
-    summary: 'Specialist bills commonly contain coding errors and charges for services not directly tied to your visit. A few key items are worth requesting documentation on before paying.',
+    summary: 'Specialist bills can contain coding or bundling issues worth a closer look before paying.',
     redFlags: [
-      { issue: 'Upcoded office visit level', description: 'Specialists frequently bill a higher complexity level (99214 or 99215) than the visit warranted. Ask for the documentation that justifies the billing level.', severity: 'medium', potentialSavings: '$75–250' },
-      { issue: 'Separate charge for results review', description: 'Reviewing test results is often bundled into the office visit fee, but some practices bill it as a separate service. This is frequently reversed on request.', severity: 'low', potentialSavings: '$50–150' },
-      { issue: 'Out-of-network assistant surgeon', description: 'If your visit involved any procedure, an assistant surgeon or anesthesiologist may have been out-of-network without your knowledge or consent.', severity: 'medium', potentialSavings: '$200–800' },
+      { issue: 'Upcoded office visit level', description: 'Ask what visit complexity level was billed (e.g. 99214 vs 99215) and request the documentation that justifies that level.', severity: 'medium' },
+      { issue: 'Separate charge for results review', description: 'Reviewing test results is sometimes bundled into the office visit fee but occasionally billed as a separate service — ask which applies here.', severity: 'low' },
+      { issue: 'Out-of-network assistant surgeon', description: 'If your visit involved any procedure, check whether an assistant surgeon or anesthesiologist was in-network before assuming the whole visit was covered.', severity: 'medium' },
     ],
-    totalPotentialSavings: '$325–1,200',
   },
   lab: {
     shieldScore: 62,
-    summary: 'Lab bills are frequently inflated through panel bundling and duplicate test charges. These are among the easiest bills to dispute successfully.',
+    summary: 'Lab bills can involve panel unbundling or duplicate charges — both are usually easy to ask about directly.',
     redFlags: [
-      { issue: 'Panel tests billed individually', description: 'Labs sometimes unbundle a standard panel (like a comprehensive metabolic panel) and bill each component test separately at a higher total cost than the panel price.', severity: 'high', potentialSavings: '$100–350' },
-      { issue: 'Same test billed twice', description: 'Duplicate test charges are common in lab billing, especially when samples are split or tests are run on different days during the same visit.', severity: 'medium', potentialSavings: '$50–200' },
-      { issue: 'Out-of-network lab used without notice', description: 'Your doctor may have sent your samples to an out-of-network lab without informing you, resulting in much higher charges than expected.', severity: 'medium', potentialSavings: '$100–400' },
+      { issue: 'Panel tests billed individually', description: 'Check whether a standard panel (like a comprehensive metabolic panel) was billed as its component tests instead of as the panel.', severity: 'high' },
+      { issue: 'Same test billed twice', description: 'Ask whether any test was run more than once during the same visit and, if so, why it was billed twice.', severity: 'medium' },
+      { issue: 'Out-of-network lab used without notice', description: 'Your doctor may have sent your samples to an out-of-network lab without informing you. Ask which lab processed each test.', severity: 'medium' },
     ],
-    totalPotentialSavings: '$250–950',
   },
   urgent_care: {
     shieldScore: 64,
-    summary: 'Urgent care bills are generally simpler than hospital bills but still contain common errors worth addressing before payment.',
+    summary: 'Urgent care bills are generally simpler than hospital bills but still worth a quick review before paying.',
     redFlags: [
-      { issue: 'Facility fee added to visit', description: 'Some urgent care centers charge a facility fee on top of the physician visit fee. This is often negotiable, especially if you were unaware of it when you checked in.', severity: 'medium', potentialSavings: '$75–200' },
-      { issue: 'Supplies billed at excessive markup', description: 'Bandages, gloves, or wound care supplies are frequently billed at 5–20x their actual cost. Request an itemized list and challenge any supply charges over $25.', severity: 'low', potentialSavings: '$30–120' },
-      { issue: 'Billed as ER rather than urgent care', description: 'If your visit was billed under an ER billing code instead of an urgent care code, you may have been charged significantly more than necessary.', severity: 'high', potentialSavings: '$200–600' },
+      { issue: 'Facility fee added to visit', description: 'Some urgent care centers charge a facility fee on top of the physician visit fee — ask whether you were told about this when you checked in.', severity: 'medium' },
+      { issue: 'Supplies billed at excessive markup', description: 'Ask for an itemized list of any supply charges and question anything that seems high relative to a retail price.', severity: 'low' },
+      { issue: 'Billed as ER rather than urgent care', description: 'Confirm your visit was billed under an urgent care code rather than an ER code, which typically costs more.', severity: 'high' },
     ],
-    totalPotentialSavings: '$305–920',
   },
   surgery_center: {
     shieldScore: 49,
-    summary: 'Surgery center bills are complex and frequently contain implant markups, anesthesia overcharges, and unbundled service fees that are worth a thorough review.',
+    summary: 'Surgery center bills are complex and often worth a line-by-line review, especially implant and anesthesia charges.',
     redFlags: [
-      { issue: 'Implant or device marked up significantly', description: 'Surgery centers frequently mark up the cost of implants, hardware, or devices by 100–500% over their actual cost. You have the right to request the invoice price.', severity: 'high', potentialSavings: '$500–3,000' },
-      { issue: 'Anesthesia time billed incorrectly', description: 'Anesthesia is billed in time units. Rounding up or miscounting the actual time is common. Request the start and end times documented in your surgical record.', severity: 'high', potentialSavings: '$200–800' },
-      { issue: 'Pre-op and post-op billed separately', description: 'Pre-operative and post-operative care is typically bundled into the surgical fee. Billing these separately is considered unbundling and is a dispute-worthy charge.', severity: 'medium', potentialSavings: '$150–500' },
+      { issue: 'Implant or device marked up significantly', description: 'You have the right to request the invoice price of any implant, hardware, or device used during your procedure.', severity: 'high' },
+      { issue: 'Anesthesia time billed incorrectly', description: 'Anesthesia is billed in time units. Request the start and end times documented in your surgical record to verify the units billed.', severity: 'high' },
+      { issue: 'Pre-op and post-op billed separately', description: 'Pre- and post-operative care is typically bundled into the surgical fee — billing it separately is worth questioning.', severity: 'medium' },
     ],
-    totalPotentialSavings: '$850–4,300',
   },
   dental: {
     shieldScore: 60,
-    summary: 'Dental bills commonly contain coding errors and charges for procedures that should be bundled together. Several items here are worth questioning.',
+    summary: 'Dental bills commonly contain coding or bundling questions worth asking about directly.',
     redFlags: [
-      { issue: 'Procedure bundling error', description: 'Certain dental procedures must be billed together under one code. Billing them separately — called unbundling — inflates the total and is grounds for a dispute.', severity: 'medium', potentialSavings: '$75–300' },
-      { issue: 'X-rays billed at non-standard rate', description: 'Dental X-ray charges vary widely. If your bill shows X-ray charges significantly above the standard rate for your area, this can be negotiated.', severity: 'low', potentialSavings: '$40–150' },
-      { issue: 'Insurance coordination error', description: 'If you have both primary and secondary dental insurance, coordination of benefits errors frequently result in you being billed for amounts your secondary insurer should cover.', severity: 'medium', potentialSavings: '$100–400' },
+      { issue: 'Procedure bundling error', description: 'Some dental procedures are required to be billed together under one code — ask whether that applies to your treatment.', severity: 'medium' },
+      { issue: 'X-rays billed at non-standard rate', description: 'Dental X-ray charges vary; ask your office how their rate compares to what they typically charge for the same films.', severity: 'low' },
+      { issue: 'Insurance coordination error', description: 'If you have both primary and secondary dental insurance, ask whether coordination of benefits was applied correctly before paying.', severity: 'medium' },
     ],
-    totalPotentialSavings: '$215–850',
   },
   other: {
     shieldScore: 55,
-    summary: 'Medical bills across all provider types share common error patterns. We\'ve flagged the most likely issues based on your bill details.',
+    summary: 'Medical bills across provider types share some common review points. We\'ve flagged the most relevant ones based on what you told us.',
     redFlags: [
-      { issue: 'No itemized bill provided', description: 'You have the legal right to a complete itemized bill. Without one, it\'s impossible to verify every charge. Always request this before paying any medical bill.', severity: 'high', potentialSavings: 'Unknown until reviewed' },
-      { issue: 'Potential duplicate charges', description: 'Duplicate line items are one of the most common medical billing errors. An itemized bill will reveal whether any service was charged more than once.', severity: 'medium', potentialSavings: '$100–500' },
-      { issue: 'Financial assistance may be available', description: 'Most hospitals and many providers offer charity care or financial hardship programs that are rarely advertised. Ask the billing department directly before paying.', severity: 'low', potentialSavings: 'Up to 100% of balance' },
+      { issue: 'No itemized bill provided', description: 'You have the legal right to a complete itemized bill. Without one, it\'s hard to verify every charge. Always request this before paying.', severity: 'high' },
+      { issue: 'Potential duplicate charges', description: 'Duplicate line items are a common medical billing issue. An itemized bill will reveal whether any service was charged more than once.', severity: 'medium' },
+      { issue: 'Financial assistance may be available', description: 'Many hospitals offer charity care or financial hardship programs that are rarely advertised. Ask the billing department directly.', severity: 'low' },
     ],
-    totalPotentialSavings: '$200–1,000+',
   },
 }
 
-const API_ERROR_FALLBACK = {
-  shieldScore: 54,
-  summary: 'We found several potential issues worth investigating. Duplicate charges and facility fees are common in this bill type.',
-  redFlags: [
-    { issue: 'Potential duplicate charge', description: 'A charge appears listed more than once. This is one of the most common medical billing errors and is often corrected upon request.', severity: 'high', potentialSavings: '$200–400' },
-    { issue: 'Upcoded procedure', description: 'The procedure code billed may not match the actual service provided. Request documentation supporting this billing level.', severity: 'medium', potentialSavings: '$100–250' },
-    { issue: 'No itemized bill on record', description: 'Without a full itemized bill it\'s impossible to verify all charges. You have the right to request one at any time.', severity: 'low', potentialSavings: 'Unknown' },
-  ],
-  totalPotentialSavings: '$300–650',
-  negotiationLetter: 'Dear Billing Department,\n\nI am writing to formally dispute charges on my recent medical bill. After reviewing the statement, I have identified several items that warrant review.\n\nI am requesting:\n1. A complete itemized bill with each procedure code\n2. A review of any duplicate line items\n3. Documentation supporting the billing codes used\n\nPlease respond within 30 business days. I am happy to work with your team to resolve this matter.\n\nSincerely,\n[Your Name]\n[Date of Service]\n[Account Number]',
-  phoneScript: 'Step 1 — Opening:\n"Hi, I\'m calling about a recent bill. My name is [Name] and my account number is [#]. I have some questions about specific charges."\n\nStep 2 — Request itemized bill:\n"Can you send me a complete itemized bill with each procedure code? I\'ll need that before I can pay."\n\nStep 3 — If they push back:\n"I understand, but I have the right to an itemized bill. I\'d like to submit that request in writing if needed."\n\nStep 4 — Dispute specific items:\n"I also noticed this charge appears twice — can you look into that?"\n\nStep 5 — Ask about financial assistance:\n"Do you have a charity care program or financial hardship assistance I might qualify for?"\n\nStep 6 — Close:\n"I\'d like to resolve this. Can we set a follow-up date if I don\'t hear back within 30 days?"',
-  nextSteps: [
-    'Request a complete itemized bill in writing within 5 business days',
-    'Call the billing department and escalate to a supervisor if needed',
-    'Send the dispute letter via certified mail with return receipt',
-    'Follow up in 30 days — if unresolved, contact your state insurance commissioner',
-  ],
+// ── Legal pages ────────────────────────────────────────────────────────────────
+function LegalPage({ title, onBack, onPrivacy, onTerms, onContact, children }) {
+  return (
+    <div className="az-root">
+      <div className="az-head">
+        <button className="back-btn" onClick={onBack}>← Home</button>
+        <span className="az-head-title">{title}</span>
+      </div>
+      <div className="az-body" style={{ maxWidth: 720 }}>
+        <p style={{ color: 'var(--muted)', fontSize: '.85rem', marginBottom: '1.8rem' }}>Last updated: {LAST_UPDATED}</p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.4rem', lineHeight: 1.75, fontSize: '.95rem' }}>
+          {children}
+        </div>
+      </div>
+      <SiteFooter onPrivacy={onPrivacy} onTerms={onTerms} onContact={onContact} />
+    </div>
+  )
+}
+
+function PrivacyPage(props) {
+  return (
+    <LegalPage title="Privacy Policy" {...props}>
+      <p><strong>What happens to your bill text.</strong> When you type or upload a bill, the text is extracted and held in your browser. Nothing is sent anywhere unless you click a button that runs an analysis.</p>
+      <p><strong>When you run an analysis.</strong> The bill text and the details you entered (provider type, insurance status, amount, optional context) are sent to BillShield's server, which forwards them to Anthropic (the maker of the Claude AI model) to generate your report. BillShield does not store a copy of your bill, your results, or your beta access code after the response is returned to your browser.</p>
+      <p><strong>"Check My Bill."</strong> The hospital-price lookup and comparison math run entirely in your browser using a public dataset we publish — nothing about your bill lines leaves your device for that comparison. Generating a dispute letter from that comparison does send the matched line items (code, hospital, billed amount) to our server and on to Anthropic, the same as above.</p>
+      <p><strong>What we don't do.</strong> BillShield does not sell your data, does not use your bill content to train any model, and does not claim HIPAA compliance — we are not a covered entity or business associate under HIPAA, and this product is not a substitute for discussing your medical records with a covered provider.</p>
+      <p><strong>Analytics.</strong> We use Vercel Analytics to see aggregate, anonymized traffic patterns (e.g. which pages are visited). It does not use cookies and does not track you across other sites.</p>
+      <p><strong>Contact.</strong> Questions about this policy: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    </LegalPage>
+  )
+}
+
+function TermsPage(props) {
+  return (
+    <LegalPage title="Terms of Service" {...props}>
+      <p><strong>Not legal, medical, or financial advice.</strong> BillShield is not a law firm, does not practice medicine, and does not provide legal, medical, or financial advice. The red-flag scan, dispute letters, phone scripts, and bill comparisons are informational starting points for your own conversation with a billing department, insurer, or qualified professional — not a substitute for one.</p>
+      <p><strong>No savings guarantee.</strong> We do not guarantee that any amount of your bill will be reduced, waived, or refunded. Outcomes depend on your specific provider, insurer, and circumstances, all of which are outside our control.</p>
+      <p><strong>AI-generated content.</strong> Analyses, letters, and scripts generated through the AI-powered flow are produced by a third-party AI model (Anthropic's Claude) based on what you provide. Review everything before sending it — verify names, dates, account numbers, and any factual claim before you rely on it.</p>
+      <p><strong>Hospital price data.</strong> The "Check My Bill" feature compares your entered amounts against prices hospitals themselves publish in federally-required machine-readable files. We show the file's source URL and the date we retrieved it. These files can change; we make no claim that the number shown is still current as of today, only that it was published by the hospital as of the stated date.</p>
+      <p><strong>Beta access codes.</strong> During the beta, AI-powered features require an access code instead of payment. We may change, revoke, or rate-limit codes at any time without notice.</p>
+      <p><strong>Contact.</strong> Questions about these terms: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    </LegalPage>
+  )
+}
+
+function ContactPage(props) {
+  return (
+    <LegalPage title="Contact" {...props}>
+      <p>For support, beta access codes, press, or anything else: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+      <p>We read every message but, as a small beta project, may take a few business days to respond.</p>
+    </LegalPage>
+  )
+}
+
+// ── Check My Bill (Part B) ──────────────────────────────────────────────────────
+function money(n) {
+  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+}
+
+function CheckBill({ onBack, betaCode, onBetaCodeChange, onPrivacy, onTerms, onContact }) {
+  const hospitals = listHospitals(hospitalPriceData)
+  const [hospitalId, setHospitalId] = useState('')
+  const [lines, setLines] = useState([{ code: '', billedAmount: '' }])
+  const [result, setResult] = useState(null)
+  const [unlocked, setUnlocked] = useState(false)
+  const [letter, setLetter] = useState({ loading: false, text: '', error: '', matched: null })
+
+  const hospital = hospitalId ? getHospitalById(hospitalPriceData, hospitalId) : null
+
+  const updateLine = (i, field, value) => {
+    setLines(ls => ls.map((l, idx) => (idx === i ? { ...l, [field]: value } : l)))
+  }
+  const addLine = () => setLines(ls => [...ls, { code: '', billedAmount: '' }])
+  const removeLine = (i) => setLines(ls => ls.filter((_, idx) => idx !== i))
+
+  const canCompare = hospital && hospital.status === 'available' && lines.some(l => l.code.trim() && l.billedAmount.trim())
+
+  const compare = () => {
+    const cleanLines = lines.filter(l => l.code.trim() && l.billedAmount.trim())
+    setResult(matchBillLines(hospital, cleanLines))
+    setUnlocked(false)
+    setLetter({ loading: false, text: '', error: '', matched: null })
+  }
+
+  const generateLetter = async () => {
+    if (!betaCode.trim()) return
+    setLetter({ loading: true, text: '', error: '', matched: null })
+    try {
+      const cleanLines = lines.filter(l => l.code.trim() && l.billedAmount.trim())
+      const res = await fetch('/api/bill-letter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: betaCode.trim(), hospitalId, lines: cleanLines }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setLetter({ loading: false, text: '', error: data.error || 'Letter generation failed.', matched: null })
+        return
+      }
+      setLetter({ loading: false, text: data.letter, error: '', matched: data.matched })
+    } catch {
+      setLetter({ loading: false, text: '', error: 'Letter generation failed. Please try again.', matched: null })
+    }
+  }
+
+  const visibleMatched = result ? (unlocked ? result.matched : result.matched.slice(0, 2)) : []
+  const lockedCount = result ? Math.max(0, result.matched.length - visibleMatched.length) : 0
+
+  return (
+    <div className="az-root">
+      <div className="az-head">
+        <button className="back-btn" onClick={onBack}>← Home</button>
+        <span className="az-head-title">Check My Bill</span>
+      </div>
+      <div className="az-body">
+        <div className="az-label">Free — no AI, no cost</div>
+        <h2 className="az-title fraunces">Compare your bill to the hospital's own prices</h2>
+        <p className="az-sub">Pick your hospital and enter a billing code and the amount you were charged. We'll compare it against that hospital's own federally-required price disclosure — not an estimate, not AI, just their own published numbers.</p>
+
+        <div className="fg">
+          <label>Hospital</label>
+          <select className="fs" value={hospitalId} onChange={e => { setHospitalId(e.target.value); setResult(null) }}>
+            <option value="">Select a hospital…</option>
+            {hospitals.map(h => (
+              <option key={h.id} value={h.id} disabled={h.status !== 'available'}>
+                {h.name}{h.status !== 'available' ? ' — not available yet' : ''}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {lines.map((line, i) => (
+          <div key={i} className="b2b-row" style={{ gridTemplateColumns: '1fr 1fr auto', marginBottom: '.6rem' }}>
+            <input className="fi" placeholder="Billing code (e.g. 99284)" value={line.code} maxLength={12}
+              onChange={e => updateLine(i, 'code', e.target.value)} />
+            <input className="fi" placeholder="Amount billed (e.g. $4,850)" value={line.billedAmount} maxLength={20}
+              onChange={e => updateLine(i, 'billedAmount', e.target.value)} />
+            {lines.length > 1 && <button className="new-btn" style={{ marginTop: 0 }} onClick={() => removeLine(i)}>✕</button>}
+          </div>
+        ))}
+        <button className="new-btn" style={{ marginTop: 0, marginBottom: '1.4rem' }} onClick={addLine}>+ Add another line</button>
+
+        <button className="btn-next" disabled={!canCompare} onClick={compare}>Compare My Bill →</button>
+
+        {hospital && hospital.status !== 'available' && (
+          <div className="stripe-note" style={{ marginTop: '1rem' }}>This hospital's price file isn't available yet: {hospital.unavailable_reason}</div>
+        )}
+
+        {result && (
+          <div style={{ marginTop: '2rem' }}>
+            {visibleMatched.length > 0 && (
+              <div style={{ overflowX: 'auto' }}>
+                <table className="cmp-table">
+                  <thead>
+                    <tr><th>Code</th><th>Description</th><th>Billed</th><th>Hospital's cash price</th><th>Difference</th></tr>
+                  </thead>
+                  <tbody>
+                    {visibleMatched.map((m, i) => (
+                      <tr key={i}>
+                        <td>{m.code}</td>
+                        <td>{m.description}</td>
+                        <td>{money(m.billedAmount)}</td>
+                        <td>{money(m.cashPrice)}</td>
+                        <td className={m.difference > 0 ? 'cmp-over' : 'cmp-under'}>
+                          {m.difference > 0 ? `+${money(m.difference)} more` : m.difference < 0 ? `${money(Math.abs(m.difference))} less` : 'Matches'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p style={{ fontSize: '.8rem', color: 'var(--muted)', marginTop: '.8rem', lineHeight: 1.6 }}>
+                  Source: hospital's own machine-readable price file, retrieved {hospital.retrieval_date}. Cash prices apply to self-pay patients — if you're insured, compare your bill against your insurer's Explanation of Benefits (EOB) instead of this cash price.
+                </p>
+              </div>
+            )}
+
+            {lockedCount > 0 && !unlocked && (
+              <div className="lock-box">
+                <div className="lock-icon">🔒</div>
+                <h3 className="lock-title fraunces">{lockedCount} more matched line{lockedCount > 1 ? 's' : ''}</h3>
+                <p className="lock-desc">Enter a beta access code to see every matched line and generate a dispute letter.</p>
+                <BetaCodeField value={betaCode} onChange={onBetaCodeChange} />
+                <button className="unlock-btn" disabled={!betaCode.trim()} onClick={() => setUnlocked(true)}>Unlock Full Comparison →</button>
+              </div>
+            )}
+
+            {result.unmatched.length > 0 && (
+              <div className="flags" style={{ marginTop: '1.4rem' }}>
+                {result.unmatched.map((u, i) => (
+                  <div key={i} className="flag medium">
+                    <div className="flag-h"><div className="flag-title">Code {u.code || '(blank)'}</div></div>
+                    <p>
+                      {u.reason === 'no_price_on_file' && "This hospital's own file doesn't list a price for this code yet — we only show real published numbers, never a guess."}
+                      {u.reason === 'invalid_input' && 'Could not read this line — double check the code and the billed amount.'}
+                      {u.reason === 'hospital_not_available' && "Price data for this hospital isn't available yet."}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {result.matched.length > 0 && (unlocked || betaCode.trim()) && (
+              <div style={{ marginTop: '2rem' }}>
+                <h3 className="fraunces" style={{ marginBottom: '.8rem' }}>Generate a dispute letter</h3>
+                {!betaCode.trim() && <BetaCodeField value={betaCode} onChange={onBetaCodeChange} />}
+                <button className="btn-next" disabled={!betaCode.trim() || letter.loading} onClick={generateLetter}>
+                  {letter.loading ? 'Generating…' : 'Generate Dispute Letter →'}
+                </button>
+                {letter.error && <p style={{ color: 'var(--red)', fontSize: '.88rem', marginTop: '.6rem' }}>{letter.error}</p>}
+                {letter.text && (
+                  <div className="letter-box" style={{ marginTop: '1rem' }}>{letter.text}</div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      <SiteFooter onPrivacy={onPrivacy} onTerms={onTerms} onContact={onContact} />
+    </div>
+  )
 }
 
 // ── App Router ─────────────────────────────────────────────────────────────────
@@ -563,6 +815,8 @@ export default function App() {
   const [view, setView] = useState('landing')
   const [results, setResults] = useState(null)
   const [tier, setTier] = useState('free')
+  const [error, setError] = useState('')
+  const [betaCode, setBetaCode] = useState('')
 
   const scrollTo = (id) => {
     setView('landing')
@@ -583,45 +837,47 @@ export default function App() {
       return
     }
 
-    // ── PAID TIERS: real Claude AI analysis ───────────────────────────────────
-    const prompt = `You are a medical billing expert and patient advocate. Analyze this medical bill and identify errors, overcharges, and negotiation opportunities.
-
-Bill Information:
-- Provider Type: ${billData.providerType}
-- Insurance Status: ${billData.insuranceStatus}
-- Total Billed: ${billData.billAmount}
-- Bill Content: ${billData.rawText || 'Not provided — analyze based on provider type and amount, and note common issues for this bill type'}
-- Additional Context: ${billData.context || 'None'}
-
-Respond ONLY with a valid JSON object. No markdown. No code blocks. No preamble. Exact structure:
-{
-  "shieldScore": <integer 0-100, 100=fully legitimate, lower=more issues>,
-  "summary": "<2-3 sentence plain-English overview>",
-  "redFlags": [{"issue":"<title>","description":"<plain English explanation>","severity":"high|medium|low","potentialSavings":"<e.g. $100-300>"}],
-  "totalPotentialSavings": "<range>",
-  "negotiationLetter": "<complete professional letter addressed to the billing department — use actual newlines — reference specific issues found>",
-  "phoneScript": "<step by step script with what to say and exactly how to handle common pushback>",
-  "nextSteps": ["<step 1>","<step 2>","<step 3>","<step 4>"]
-}`
-
+    // ── PAID TIERS: real Claude AI analysis, gated by beta access code ────────
     try {
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt }),
+        body: JSON.stringify({
+          code: billData.code,
+          billData: {
+            providerType: billData.providerType,
+            insuranceStatus: billData.insuranceStatus,
+            billAmount: billData.billAmount,
+            rawText: billData.rawText,
+            context: billData.context,
+          },
+        }),
       })
       const data = await res.json()
-      if (data.error) throw new Error(data.error)
+      if (!res.ok) {
+        setError(data.error || 'Analysis failed. Please try again.')
+        setView('error')
+        return
+      }
       setResults(data)
       setView('results')
     } catch {
-      setResults(API_ERROR_FALLBACK)
-      setView('results')
+      setError('We could not reach the analysis service. Please check your connection and try again.')
+      setView('error')
     }
   }
 
-  if (view === 'landing') return <Landing onStart={() => setView('analyze')} onPricing={() => scrollTo('pricing')} onB2B={() => scrollTo('b2b')} />
-  if (view === 'analyze') return <Analyze onBack={() => setView('landing')} onComplete={analyze} />
+  const goPrivacy = () => setView('privacy')
+  const goTerms = () => setView('terms')
+  const goContact = () => setView('contact')
+
+  if (view === 'landing') return <Landing onStart={() => setView('analyze')} onPricing={() => scrollTo('pricing')} onB2B={() => scrollTo('b2b')} onCheckBill={() => setView('checkBill')} onPrivacy={goPrivacy} onTerms={goTerms} onContact={goContact} />
+  if (view === 'analyze') return <Analyze onBack={() => setView('landing')} onComplete={analyze} betaCode={betaCode} onBetaCodeChange={setBetaCode} />
   if (view === 'processing') return <Processing />
-  if (view === 'results') return <Results results={results} tier={tier} onNew={() => setView('landing')} />
+  if (view === 'error') return <AnalysisError message={error} onRetry={() => setView('analyze')} onHome={() => setView('landing')} />
+  if (view === 'results') return <Results results={results} tier={tier} onNew={() => setView('landing')} onUpgrade={() => setView('analyze')} />
+  if (view === 'checkBill') return <CheckBill onBack={() => setView('landing')} betaCode={betaCode} onBetaCodeChange={setBetaCode} onPrivacy={goPrivacy} onTerms={goTerms} onContact={goContact} />
+  if (view === 'privacy') return <PrivacyPage onBack={() => setView('landing')} onPrivacy={goPrivacy} onTerms={goTerms} onContact={goContact} />
+  if (view === 'terms') return <TermsPage onBack={() => setView('landing')} onPrivacy={goPrivacy} onTerms={goTerms} onContact={goContact} />
+  if (view === 'contact') return <ContactPage onBack={() => setView('landing')} onPrivacy={goPrivacy} onTerms={goTerms} onContact={goContact} />
 }

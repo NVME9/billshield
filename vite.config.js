@@ -5,5 +5,9 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     exclude: ['pdfjs-dist']
+  },
+  test: {
+    environment: 'node',
+    include: ['src/**/*.test.js']
   }
 })

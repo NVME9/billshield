@@ -212,6 +212,14 @@ footer .fl span { color: var(--eml); }
 .new-btn { background: none; border: 1px solid var(--border); padding: .65rem 1.4rem; border-radius: 8px; cursor: pointer; font-family: 'DM Sans', sans-serif; color: var(--muted); margin-top: 1.8rem; transition: all .2s; }
 .new-btn:hover { border-color: var(--navy); color: var(--navy); }
 
+/* CHECK MY BILL — comparison table */
+.cmp-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; font-size: .88rem; }
+.cmp-table th, .cmp-table td { padding: .75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+.cmp-table th { background: var(--cream); font-weight: 600; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.cmp-table tr:last-child td { border-bottom: none; }
+.cmp-over { color: var(--red); font-weight: 600; }
+.cmp-under { color: var(--em); font-weight: 600; }
+
 @media (max-width: 580px) {
   .m-cards { grid-template-columns: 1fr; }
   .b2b-row { grid-template-columns: 1fr; }

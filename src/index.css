@@ -228,3 +228,24 @@ footer .fl span { color: var(--eml); }
   .hero h1 { font-size: 2rem; }
   .price-grid { grid-template-columns: 1fr; }
 }
+
+/* ADMIN — owner-only stats page */
+.admin-gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--navy); padding: 2rem; }
+.admin-gate-card { background: #fff; border-radius: 14px; padding: 2.2rem; width: 100%; max-width: 360px; text-align: left; }
+.admin-gate-card h2 { margin-bottom: .5rem; }
+.admin-input { width: 100%; padding: .72rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: .93rem; margin: 1rem 0; }
+.admin-error { color: var(--red); font-size: .85rem; margin-top: .8rem; }
+.admin-root { min-height: 100vh; background: var(--cream); padding: 2rem; }
+.admin-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.4rem; }
+.admin-head-actions { display: flex; align-items: center; gap: 1rem; }
+.admin-refreshed { font-size: .82rem; color: var(--muted); }
+.admin-refresh-btn { color: var(--navy); border-color: var(--border); padding: .5rem 1.2rem; }
+.admin-alert { background: var(--redd); color: var(--red); border: 1px solid var(--red); border-radius: 10px; padding: .9rem 1.2rem; font-weight: 600; margin-bottom: 1.4rem; }
+.admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+.admin-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; }
+.admin-card-head { display: flex; align-items: center; justify-content: space-between; gap: .6rem; margin-bottom: .5rem; }
+.admin-card-head h3 { font-size: .95rem; font-weight: 600; }
+.admin-num { font-family: 'Fraunces', serif; font-size: 1.6rem; color: var(--eml); font-weight: 700; }
+.admin-badge { background: var(--amberd); color: var(--amber); font-size: .72rem; font-weight: 700; padding: .25rem .6rem; border-radius: 100px; text-transform: uppercase; letter-spacing: .03em; white-space: nowrap; }
+.admin-def { font-size: .85rem; color: var(--muted); }
+.admin-note { font-size: .8rem; color: var(--muted); margin-top: .5rem; padding-top: .5rem; border-top: 1px dashed var(--border); }

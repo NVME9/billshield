@@ -810,9 +810,133 @@ function CheckBill({ onBack, betaCode, onBetaCodeChange, onPrivacy, onTerms, onC
   )
 }
 
+// ── Admin Stats (owner-only, not linked from the public site) ──────────────────
+function AdminStatCard({ title, metric }) {
+  return (
+    <div className="admin-card">
+      <div className="admin-card-head">
+        <h3>{title}</h3>
+        {metric.tracked
+          ? metric.total !== null && <span className="admin-num">{metric.total}</span>
+          : <span className="admin-badge">Not tracked yet</span>}
+      </div>
+      <p className="admin-def">{metric.definition}</p>
+      {!metric.tracked && <p className="admin-note">{metric.note}</p>}
+    </div>
+  )
+}
+
+function AdminStats() {
+  const [secret, setSecret] = useState(() => {
+    try { return sessionStorage.getItem('bs_admin_secret') || '' } catch { return '' }
+  })
+  const [inputSecret, setInputSecret] = useState('')
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [authError, setAuthError] = useState('')
+
+  const load = async (secretToUse) => {
+    if (!secretToUse) return
+    setLoading(true)
+    setAuthError('')
+    try {
+      const res = await fetch('/api/admin-stats', { headers: { 'x-admin-secret': secretToUse } })
+      if (!res.ok) {
+        setAuthError(
+          res.status === 401
+            ? 'Incorrect admin secret, or ADMIN_STATS_SECRET is not set on this deployment.'
+            : 'Could not load stats. Please try again.'
+        )
+        setData(null)
+        try { sessionStorage.removeItem('bs_admin_secret') } catch { /* ignore */ }
+        return
+      }
+      const json = await res.json()
+      setData(json)
+      try { sessionStorage.setItem('bs_admin_secret', secretToUse) } catch { /* ignore */ }
+    } catch {
+      setAuthError('Could not reach the stats service.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (secret) load(secret)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (!data) {
+    return (
+      <div className="admin-gate">
+        <form
+          className="admin-gate-card"
+          onSubmit={(e) => {
+            e.preventDefault()
+            setSecret(inputSecret)
+            load(inputSecret)
+          }}
+        >
+          <h2 className="fraunces">BillShield Admin</h2>
+          <p className="admin-def">Enter the admin stats secret to continue.</p>
+          <input
+            type="password"
+            className="admin-input"
+            value={inputSecret}
+            onChange={(e) => setInputSecret(e.target.value)}
+            placeholder="Admin secret"
+            autoFocus
+          />
+          <button type="submit" className="btn-p" disabled={loading || !inputSecret}>
+            {loading ? 'Checking…' : 'View Stats'}
+          </button>
+          {authError && <p className="admin-error">{authError}</p>}
+        </form>
+      </div>
+    )
+  }
+
+  const { metrics, generatedAt } = data
+
+  return (
+    <div className="admin-root">
+      <div className="admin-head">
+        <h1 className="fraunces">BillShield Admin — Stats</h1>
+        <div className="admin-head-actions">
+          <span className="admin-refreshed">Last refreshed: {new Date(generatedAt).toLocaleString()}</span>
+          <button className="btn-s admin-refresh-btn" onClick={() => load(secret)} disabled={loading}>
+            {loading ? 'Refreshing…' : 'Refresh'}
+          </button>
+        </div>
+      </div>
+
+      {metrics.lastActivity.tracked && metrics.lastActivity.staleWarning && (
+        <div className="admin-alert">No recorded activity in the last 72 hours.</div>
+      )}
+
+      <div className="admin-grid">
+        <AdminStatCard title="Signups" metric={metrics.signups} />
+        <AdminStatCard title="Analyses & letters run" metric={metrics.analyses} />
+        <AdminStatCard title="Error rate" metric={metrics.errorRate} />
+        <AdminStatCard title="Paid vs. free" metric={metrics.paidVsFree} />
+        <AdminStatCard title="Revenue events" metric={metrics.revenue} />
+        <AdminStatCard
+          title="Last activity"
+          metric={{
+            tracked: metrics.lastActivity.tracked,
+            total: metrics.lastActivity.timestamp,
+            definition: metrics.lastActivity.definition,
+            note: metrics.lastActivity.note,
+          }}
+        />
+      </div>
+    </div>
+  )
+}
+
 // ── App Router ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [view, setView] = useState('landing')
+  const [view, setView] = useState(() => (window.location.pathname === '/admin' ? 'admin' : 'landing'))
   const [results, setResults] = useState(null)
   const [tier, setTier] = useState('free')
   const [error, setError] = useState('')
@@ -871,6 +995,7 @@ export default function App() {
   const goTerms = () => setView('terms')
   const goContact = () => setView('contact')
 
+  if (view === 'admin') return <AdminStats />
   if (view === 'landing') return <Landing onStart={() => setView('analyze')} onPricing={() => scrollTo('pricing')} onB2B={() => scrollTo('b2b')} onCheckBill={() => setView('checkBill')} onPrivacy={goPrivacy} onTerms={goTerms} onContact={goContact} />
   if (view === 'analyze') return <Analyze onBack={() => setView('landing')} onComplete={analyze} betaCode={betaCode} onBetaCodeChange={setBetaCode} />
   if (view === 'processing') return <Processing />
